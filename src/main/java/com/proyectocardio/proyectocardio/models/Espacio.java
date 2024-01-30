@@ -2,6 +2,10 @@ package com.proyectocardio.proyectocardio.models;
 
 import java.time.LocalDate;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,11 +55,13 @@ public class Espacio  {
     private LocalDate fechRegDga;
 
     @ManyToOne
+    @JsonBackReference(value="cliente-espacio")
     @JoinColumn(name = "FK_CLIENTE", updatable = true, nullable = true)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "espacio")
-    private Set<Lugar> lugar;
+    @JsonManagedReference (value="espacio-lugar")
+    private Set<Lugar> lugares;
     
  
 

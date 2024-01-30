@@ -2,11 +2,8 @@ package com.proyectocardio.proyectocardio.models;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
@@ -17,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -56,6 +52,7 @@ public class Diploma {
     private String impartidor;
 
     @ManyToOne
+    @JsonBackReference(value="formacion-diploma")
     @JoinColumn(name = "FK_FORMACION", updatable = true, nullable =true)
     private Formacion formacion;
 

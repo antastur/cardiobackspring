@@ -22,20 +22,20 @@ public class CursoService implements ICursoService{
 
     @Override
     public List<Curso> getCursos() {
-        // Metodo para obtener todos los alumnos de BD
+        // Metodo para obtener todos los cursos de BD
         List<Curso> cursos=this.cursoRepositorio.findAll();
         return cursos;
     }
 
     @Override
     public Curso creaCurso(@RequestBody Curso curso) {
-        // Metodo para crear un alumno en BD
+        // Metodo para crear un curso en BD
       return this.cursoRepositorio.save(curso);
     }
 
     @Override
     public Curso cambiarCurso(Long id, Curso curso) {
-        // Metodo para modificar un alumno en BD
+        // Metodo para modificar un curso en BD
         Curso curs=this.cursoRepositorio.findById(id).get();
         curs.setNombre(curs.getNombre());
         curs.setFormaciones(curs.getFormaciones());
@@ -45,7 +45,7 @@ public class CursoService implements ICursoService{
 
     @Override
     public Boolean borrarCurso(Long id) {
-       // Metodo para eliminar un alumno de BD
+       // Metodo para eliminar un curso de BD
        Curso curso;
         Boolean borrado=true;
         Optional<Curso> ocu=this.cursoRepositorio.findById(id);
@@ -62,7 +62,7 @@ public class CursoService implements ICursoService{
 
     @Override
     public Curso getCurso(Long id) {
-        // Metodo para encontrar un alumno en concreto segun su id
+        // Metodo para encontrar un curso en concreto segun su id
         Optional < Curso> op= this.cursoRepositorio.findById(id);
         Curso cu=null;
             if(op.isPresent()){

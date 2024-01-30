@@ -65,6 +65,12 @@ public class Equipo {
     @Column(name="fechaEntrega")
     private LocalDate fechaEntrega;
 
+    @Temporal(TemporalType.DATE)
+    @Nonnull
+    @Column(name="fechaRevision")
+    private LocalDate fechaMantenimiento;
+    
+
     @Column(name="codAiviago")
     private String codAiviago;
 

@@ -9,6 +9,9 @@ import java.util.Set;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -65,12 +68,15 @@ public class Formacion {
     private String impartidor;
     
     @OneToMany(mappedBy="formacion")
-    private Set<Diploma> diploma;
+    @JsonManagedReference(value="formacion-diploma")
+    private Set<Diploma> diplomas;
     
     @OneToMany(mappedBy = "formacion")
+    @JsonManagedReference(value="formacion-alumno")
     private Set<Alumno> alumnos;
 
     @ManyToOne
+    @JsonBackReference(value="curso-formacion")
     @JoinColumn(name = "FK_CURSO", updatable = true, nullable = true)
     private Curso curso;
 

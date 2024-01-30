@@ -66,7 +66,7 @@ public class MyRunner  implements CommandLineRunner{
         this.espacioRepositorio=espacioRepositorio;
       }
 
-    @Transactional 
+    //@Transactional 
     @Override
     public void run(String... args) throws Exception {
        
@@ -86,7 +86,7 @@ public class MyRunner  implements CommandLineRunner{
         LocalDate fechFab = LocalDate.parse("08 04 2020", DateTimeFormatter.ofPattern("dd MM yyyy"));
         LocalDate fechCad = LocalDate.parse("08 04 2028", DateTimeFormatter.ofPattern("dd MM yyyy"));
         LocalDate fechEnt = LocalDate.parse("08 09 2021", DateTimeFormatter.ofPattern("dd MM yyyy")); 
-
+       
         /*LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyy");
         String text = date.format(formatter);
@@ -95,6 +95,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo1.setFechaFabricacion(fechFab);
         equipo1.setFechaCaducidad(fechCad);
         equipo1.setFechaEntrega(fechEnt);
+        equipo1.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo1.setSenaletica(false);
         equipo1.setCondicionUsado(false);
         equipo1.setDocUsoCreada(false);
@@ -120,6 +121,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo2.setFechaFabricacion(fechFab);
         equipo2.setFechaCaducidad(fechCad);
         equipo2.setFechaEntrega(fechEnt);
+        equipo2.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo2.setSenaletica(false);
         equipo2.setCondicionUsado(false);
         equipo2.setDocUsoCreada(false);
@@ -145,6 +147,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo3.setFechaFabricacion(fechFab);
         equipo3.setFechaCaducidad(fechCad);
         equipo3.setFechaEntrega(fechEnt);
+        equipo3.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo3.setSenaletica(false);
         equipo3.setCondicionUsado(false);
         equipo3.setDocUsoCreada(false);
@@ -169,6 +172,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo4.setFechaFabricacion(fechFab);
         equipo4.setFechaCaducidad(fechCad);
         equipo4.setFechaEntrega(fechEnt);
+        equipo4.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo4.setSenaletica(false);
         equipo4.setCondicionUsado(false);
         equipo4.setDocUsoCreada(false);
@@ -193,6 +197,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo5.setFechaFabricacion(fechFab);
         equipo5.setFechaCaducidad(fechCad);
         equipo5.setFechaEntrega(fechEnt);
+        equipo5.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo5.setSenaletica(false);
         equipo5.setCondicionUsado(false);
         equipo5.setDocUsoCreada(false);
@@ -217,6 +222,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo6.setFechaFabricacion(fechFab);
         equipo6.setFechaCaducidad(fechCad);
         equipo6.setFechaEntrega(fechEnt);
+        equipo6.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo6.setSenaletica(false);
         equipo6.setCondicionUsado(false);
         equipo6.setDocUsoCreada(false);
@@ -240,6 +246,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo7.setFechaFabricacion(fechFab);
         equipo7.setFechaCaducidad(fechCad);
         equipo7.setFechaEntrega(fechEnt);
+        equipo7.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo7.setSenaletica(false);
         equipo7.setCondicionUsado(false);
         equipo7.setDocUsoCreada(false);
@@ -263,6 +270,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo8.setFechaFabricacion(fechFab);
         equipo8.setFechaCaducidad(fechCad);
         equipo8.setFechaEntrega(fechEnt);
+        equipo8.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo8.setSenaletica(false);
         equipo8.setCondicionUsado(false);
         equipo8.setDocUsoCreada(false);
@@ -286,6 +294,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo9.setFechaFabricacion(fechFab);
         equipo9.setFechaCaducidad(fechCad);
         equipo9.setFechaEntrega(fechEnt);
+        equipo9.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo9.setSenaletica(false);
         equipo9.setCondicionUsado(false);
         equipo9.setDocUsoCreada(false);
@@ -310,126 +319,11 @@ public class MyRunner  implements CommandLineRunner{
         equipo10.setFechaFabricacion(fechFab);
         equipo10.setFechaCaducidad(fechCad);
         equipo10.setFechaEntrega(fechEnt);
+        equipo10.setFechaMantenimiento(fechEnt.plusYears(1));
         equipo10.setSenaletica(false);
         equipo10.setCondicionUsado(false);
         equipo10.setDocUsoCreada(false);
-        //equipoRepositorio.save(equipo10);
-/* 
-    Cliente alumasa= new Cliente();
-
-       alumasa.setCif("A12223111");
-       alumasa.setNombEmp("Alumasa");
-       alumasa.setNombre("Antonio");
-       alumasa.setApellidos("Depedro Perez");
-       alumasa.setDni("12322333i");
-       alumasa.setDireccionFiscal("C/Alameda 21 1C 50002 Zaragoza");
-       alumasa.setComercial("Alonso Garcia");
-
-      //clienteRepositorio.save(alumasa);
-
-      Espacio espacio1=new Espacio();
-      espacio1.setCliente(alumasa);
-      espacio1.setDireccion("c/Francisco Victoria 26 50012 Zaragoza");
-      espacio1.setEmail("alumasa@gmail.com");
-      espacio1.setNumTelef("976132324");
-      espacio1.setHorario("8,30-15,00");
-      LocalDate fechReg= LocalDate.parse("08 04 2020", DateTimeFormatter.ofPattern("dd MM yyyy"));
-      espacio1.setFechRegDga(fechReg);
-      
-
-      //espacioRepositorio.save(espacio1);
-      
-
-      Lugar nave1=new Lugar();
-      nave1.setUbicacion("almacen edificio3");
-     // nave1.setEquipo(equipo1);
-      Lugar parking=new Lugar();
-      parking.setUbicacion("parking");
-    
-      
-     
-      //lugarRepositorio.save(nave1);
-      //lugarRepositorio.save(parking);
-      
-
        
-      Vehiculo vehiculo1=new Vehiculo();
-      //vehiculo1.setEquipo(equipo2);
-      vehiculo1.setMarca("SEAT");
-      vehiculo1.setModelo("ALHAMBRA");
-      vehiculo1.setMatricula("0788GGH");
-      vehiculo1.setTelefono("654773245");
-      vehiculo1.setLugar(parking);
-      
-
-      Vehiculo vehiculo2=new Vehiculo();
-      //vehiculo2.setEquipo(equipo1);
-      vehiculo2.setMarca("FORD");
-      vehiculo2.setModelo("TRANSIT");
-      vehiculo2.setMatricula("5678PLK");
-      vehiculo2.setTelefono("654443267"); 
-      vehiculo2.setLugar(parking);
-     
-      
-      //vehiculoRepositorio.save(vehiculo1);
-      //vehiculoRepositorio.save(vehiculo2);
-      
-      Set<Vehiculo> vehiculos=new HashSet<Vehiculo>();
-      vehiculos.add(vehiculo1);
-      vehiculos.add(vehiculo2);
-      parking.setVehiculo(vehiculos);
-      
-
-      Set<Equipo> equiposnave1= new HashSet<Equipo>();
-      equiposnave1.add(equipo3);
-
-      Set<Equipo> equiposparking= new HashSet<Equipo>();
-      equiposparking.add(vehiculo1.getEquipo());
-      equiposparking.add(vehiculo2.getEquipo());
-
-      nave1.setEquipo(equiposnave1);
-      parking.setEquipo(equiposparking);
-      parking.setVehiculo(vehiculos);
-     
-     // lugarRepositorio.save(nave1);
-      //lugarRepositorio.save(parking);
-     
-      
-      Set<Lugar> lugares=new HashSet<Lugar>();
-      
-      lugares.add(nave1);
-      lugares.add(parking);
-     
-      espacio1.setLugar(lugares);
-      
-     
-      
-      Set<Espacio> espacios=new HashSet<Espacio>();
-      espacios.add(espacio1);
-      
-    
-      alumasa.setEspacio(espacios);
-      //espacioRepositorio.save(espacio1);
-      //clienteRepositorio.save(alumasa);
-      Espacio espacio=espacioRepositorio.getReferenceById(espacio1.getId());
-      espacio.setCliente(alumasa);
-      
-      
-     
-      
-
-
-
-      clienteRepositorio.save(alumasa);
-      
-      lugarRepositorio.save(nave1);
-      lugarRepositorio.save(parking);
-
-      vehiculoRepositorio.save(vehiculo1);
-      vehiculoRepositorio.save(vehiculo2);
-
-      espacioRepositorio.save(espacio1);  */
-
       Cliente alumasa= new Cliente();
 
       alumasa.setCif("A12223111");
@@ -544,15 +438,7 @@ public class MyRunner  implements CommandLineRunner{
       nave5.setUbicacion("recepcion");
       nave5.setEspacio(espacio5);
       nave5.setEquipo(equipo7);
-      //Lugar parking=new Lugar();
-      //parking.setUbicacion("parking");
-      //parking.setEspacio(espacio1);
-      //Set<Equipo> equiposnave1= new HashSet<Equipo>();
-      //equiposnave1.add(equipo3);
-      //nave1.setEquipo(equiposnave1);
-
-      
-      
+     
       Vehiculo vehiculo1=new Vehiculo();
       vehiculo1.setUbicacion("vehiculo1 en parking");
       vehiculo1.setEspacio(espacio1);
@@ -753,7 +639,7 @@ public class MyRunner  implements CommandLineRunner{
       formacional1.setSenaletica(false);
       formacional1.setEstado(false);
       formacional1.setRecuerdo(fechFor.plusYears(1));
-      formacional1.setDiploma(diplomasal1);
+      //formacional1.setDiploma(diplomasal1);
       formacional1.setCurso(curso1);
       formacional1.setImpartidor("Daniel Perez Pardos");
       formacional1.setAlumnos(alumnosal1);
@@ -766,7 +652,7 @@ public class MyRunner  implements CommandLineRunner{
       formacional2.setSenaletica(false);
       formacional2.setEstado(false);
       formacional2.setRecuerdo(fechFor.plusYears(1));
-      formacional2.setDiploma(diplomasal2);
+      //formacional2.setDiploma(diplomasal2);
       formacional2.setCurso(curso1);
       formacional2.setImpartidor("Jorge Novellon Grañena");
       formacional2.setAlumnos(alumnosal2);
@@ -778,7 +664,7 @@ public class MyRunner  implements CommandLineRunner{
       formacionfe.setSenaletica(false);
       formacionfe.setEstado(false);
       formacionfe.setRecuerdo(fechFor.plusYears(1));
-      formacionfe.setDiploma(diplomasfe);
+      //formacionfe.setDiploma(diplomasfe);
       formacionfe.setCurso(curso2);
       formacionfe.setImpartidor("Daniel Perez Pardos");
       formacionfe.setAlumnos(alumnosfe);
@@ -790,7 +676,7 @@ public class MyRunner  implements CommandLineRunner{
       formaciontr.setSenaletica(false);
       formaciontr.setEstado(false);
       formaciontr.setRecuerdo(fechFor.plusYears(1));
-      formaciontr.setDiploma(diplomastr);
+     // formaciontr.setDiploma(diplomastr);
       formaciontr.setCurso(curso3);
       formaciontr.setImpartidor("Daniel Perez Pardos");
       formaciontr.setAlumnos(alumnostr);
@@ -803,7 +689,7 @@ public class MyRunner  implements CommandLineRunner{
       formacionba1.setSenaletica(false);
       formacionba1.setEstado(false);
       formacionba1.setRecuerdo(fechFor.plusYears(1));
-      formacionba1.setDiploma(diplomasba1);
+      //formacionba1.setDiploma(diplomasba1);
       formacionba1.setCurso(curso4);
       formacionba1.setImpartidor("Daniel Perez Pardos");
       formacionba1.setAlumnos(alumnosba1);
@@ -815,11 +701,75 @@ public class MyRunner  implements CommandLineRunner{
       formacionba2.setSenaletica(false);
       formacionba2.setEstado(false);
       formacionba2.setRecuerdo(fechFor.plusYears(1));
-      formacionba2.setDiploma(diplomasba2);
+      //formacionba2.setDiploma(diplomasba2);
       formacionba2.setCurso(curso4);
       formacionba2.setImpartidor("Jorge Novellon Grañena");
       formacionba2.setAlumnos(alumnosba2);
 
+
+
+
+      clienteRepositorio.save(alumasa);
+      clienteRepositorio.save(ferrosa);
+      clienteRepositorio.save(transina);
+      clienteRepositorio.save(balay);
+
+      espacioRepositorio.save(espacio1);
+      espacioRepositorio.save(espacio2);
+      espacioRepositorio.save(espacio3);
+      espacioRepositorio.save(espacio4);
+      espacioRepositorio.save(espacio5);
+   
+ 
+
+      equipoRepositorio.save(equipo1);
+      equipoRepositorio.save(equipo2);
+      equipoRepositorio.save(equipo3);
+      equipoRepositorio.save(equipo4);
+      equipoRepositorio.save(equipo5);
+      equipoRepositorio.save(equipo6);
+      equipoRepositorio.save(equipo7);
+      equipoRepositorio.save(equipo8);
+      equipoRepositorio.save(equipo9);
+      equipoRepositorio.save(equipo10);
+
+
+      lugarRepositorio.save(nave1);
+      lugarRepositorio.save(nave2);
+      lugarRepositorio.save(nave3);
+      lugarRepositorio.save(nave4);
+      lugarRepositorio.save(nave5);
+      vehiculoRepositorio.save(vehiculo1);
+      vehiculoRepositorio.save(vehiculo2);
+      vehiculoRepositorio.save(vehiculo3);
+
+
+      cursoRepositorio.save(curso1);
+      cursoRepositorio.save(curso2);
+      cursoRepositorio.save(curso3);
+      cursoRepositorio.save(curso4);
+      cursoRepositorio.save(curso5);
+      
+      formacionRepositorio.save(formacional1);
+      formacionRepositorio.save(formacional2);
+      formacionRepositorio.save(formacionfe);
+      formacionRepositorio.save(formaciontr);
+      formacionRepositorio.save(formacionba1);
+      formacionRepositorio.save(formacionba2);
+      
+       
+      alumnoRepositorio.save(alumno1);
+      alumnoRepositorio.save(alumno2);
+      alumnoRepositorio.save(alumno3);
+      alumnoRepositorio.save(alumno4);
+      alumnoRepositorio.save(alumno5);
+      alumnoRepositorio.save(alumno6);
+      alumnoRepositorio.save(alumno7);
+      alumnoRepositorio.save(alumno8);
+      alumnoRepositorio.save(alumno9);
+      alumnoRepositorio.save(alumno10);
+      alumnoRepositorio.save(alumno11);
+      alumnoRepositorio.save(alumno12);
 
 
       Alumno[] arrayalumal1=new Alumno[alumnosal1.size()];
@@ -916,69 +866,6 @@ public class MyRunner  implements CommandLineRunner{
          arrayalumal1[x].setDiploma(arraydipal1[x]);
       }
 
-
-
-      clienteRepositorio.save(alumasa);
-      clienteRepositorio.save(ferrosa);
-      clienteRepositorio.save(transina);
-      clienteRepositorio.save(balay);
-
-      espacioRepositorio.save(espacio1);
-      espacioRepositorio.save(espacio2);
-      espacioRepositorio.save(espacio3);
-      espacioRepositorio.save(espacio4);
-      espacioRepositorio.save(espacio5);
-   
-      lugarRepositorio.save(nave1);
-      lugarRepositorio.save(nave2);
-      lugarRepositorio.save(nave3);
-      lugarRepositorio.save(nave4);
-      lugarRepositorio.save(nave5);
-      vehiculoRepositorio.save(vehiculo1);
-      vehiculoRepositorio.save(vehiculo2);
-      vehiculoRepositorio.save(vehiculo3);
-
-      equipoRepositorio.save(equipo1);
-      equipoRepositorio.save(equipo2);
-      equipoRepositorio.save(equipo3);
-      equipoRepositorio.save(equipo4);
-      equipoRepositorio.save(equipo5);
-      equipoRepositorio.save(equipo6);
-      equipoRepositorio.save(equipo7);
-      equipoRepositorio.save(equipo8);
-      equipoRepositorio.save(equipo9);
-      equipoRepositorio.save(equipo10);
-
-
-      cursoRepositorio.save(curso1);
-      cursoRepositorio.save(curso2);
-      cursoRepositorio.save(curso3);
-      cursoRepositorio.save(curso4);
-      cursoRepositorio.save(curso5);
-      
-      formacionRepositorio.save(formacional1);
-      formacionRepositorio.save(formacional2);
-      formacionRepositorio.save(formacionfe);
-      formacionRepositorio.save(formaciontr);
-      formacionRepositorio.save(formacionba1);
-      formacionRepositorio.save(formacionba2);
-      
-
-      alumnoRepositorio.save(alumno1);
-      alumnoRepositorio.save(alumno2);
-      alumnoRepositorio.save(alumno3);
-      alumnoRepositorio.save(alumno4);
-      alumnoRepositorio.save(alumno5);
-      alumnoRepositorio.save(alumno6);
-      alumnoRepositorio.save(alumno7);
-      alumnoRepositorio.save(alumno8);
-      alumnoRepositorio.save(alumno9);
-      alumnoRepositorio.save(alumno10);
-      alumnoRepositorio.save(alumno11);
-      alumnoRepositorio.save(alumno12);
-
-
-      
       diplomaRepositorio.save(diplomaal11);
       diplomaRepositorio.save(diplomaal12);
       diplomaRepositorio.save(diplomaal21);
@@ -991,6 +878,21 @@ public class MyRunner  implements CommandLineRunner{
       diplomaRepositorio.save(diplomaba12);
       diplomaRepositorio.save(diplomaba21);
       diplomaRepositorio.save(diplomaba22);
+
+  
+      alumnoRepositorio.save(alumno1);
+      alumnoRepositorio.save(alumno2);
+      alumnoRepositorio.save(alumno3);
+      alumnoRepositorio.save(alumno4);
+      alumnoRepositorio.save(alumno5);
+      alumnoRepositorio.save(alumno6);
+      alumnoRepositorio.save(alumno7);
+      alumnoRepositorio.save(alumno8);
+      alumnoRepositorio.save(alumno9);
+      alumnoRepositorio.save(alumno10);
+      alumnoRepositorio.save(alumno11);
+      alumnoRepositorio.save(alumno12);
+     
       
 
     /*  alumnoRepositorio.save(alumno2);

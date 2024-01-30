@@ -17,7 +17,7 @@ import com.proyectocardio.proyectocardio.services.IEquipoService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/equipos")
+@RequestMapping("/cardio/menuPrincipal/equipos")
 public class EquipoController {
 
     @Autowired

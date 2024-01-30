@@ -2,8 +2,10 @@ package com.proyectocardio.proyectocardio.models;
 
 
 
-import java.util.List;
+
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,10 +51,13 @@ public class Cliente {
     @Column(name="comercial")
     private String comercial;
 
+    
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference(value="cliente-espacio")
     private Set<Espacio> espacio;
     
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference(value="cliente-curso")
     private Set<Curso> curso;
 
   

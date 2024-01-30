@@ -22,20 +22,20 @@ public class ClienteService implements IClienteService{
 
     @Override
     public List<Cliente> getClientes() {
-       // Metodo para obtener todos los alumnos de BD
-        List<Cliente> alumnos=this.clienteRepositorio.findAll();
-        return alumnos;
+       // Metodo para obtener todos los clientes de BD
+        List<Cliente> clientes=this.clienteRepositorio.findAll();
+        return clientes;
     }
 
     @Override
     public Cliente creaCliente(@RequestBody Cliente cliente) {
-      // Metodo para crear un alumno en BD
+      // Metodo para crear un cliente en BD
       return this.clienteRepositorio.save(cliente);
     }
 
     @Override
     public Cliente cambiarCliente(Long id, Cliente cliente) {
-       // Metodo para modificar un alumno en BD
+       // Metodo para modificar un cliente en BD
        Cliente clien=this.clienteRepositorio.findById(id).get();
        clien.setCif(clien.getCif());
        clien.setNombEmp(clien.getNombEmp());
@@ -54,7 +54,7 @@ public class ClienteService implements IClienteService{
 
     @Override
     public Boolean borrarCliente(Long id) {
-       // Metodo para eliminar un alumno de BD
+       // Metodo para eliminar un cliente de BD
         Cliente cliente;
         Boolean borrado=true;
         Optional<Cliente> ocl=this.clienteRepositorio.findById(id);

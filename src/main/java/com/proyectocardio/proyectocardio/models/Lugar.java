@@ -3,6 +3,8 @@ package com.proyectocardio.proyectocardio.models;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +37,7 @@ public class Lugar {
     private Equipo equipo;
 
     @ManyToOne
+    @JsonBackReference(value="espacio-lugar")
     @JoinColumn(name = "FK_ESPACIO", updatable = true, nullable = true)
     private Espacio espacio;
 }

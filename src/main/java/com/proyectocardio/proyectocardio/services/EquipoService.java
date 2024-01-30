@@ -18,20 +18,20 @@ public class EquipoService implements IEquipoService{
    
     @Override
     public List<Equipo> getEquipos() {
-        // Metodo para obtener todos los alumnos de BD
+        // Metodo para obtener todos los equipos de BD
         List<Equipo> equipos=this.equipoRepositorio.findAll();
         return equipos;
     }
 
     @Override
     public Equipo creaEquipo(Equipo equipo) {
-        // Metodo para crear un alumno en BD
+        // Metodo para crear un equipo en BD
         return this.equipoRepositorio.save(equipo);
     }
 
     @Override
     public Equipo cambiarEquipo(Long id, Equipo equipo) {
-         // Metodo para modificar un alumno en BD
+         // Metodo para modificar un equipo en BD
          Equipo equip=this.equipoRepositorio.findById(id).get();
          equip.setNumSerie(equipo.getNumSerie());
           equip.setMarca(equipo.getMarca());

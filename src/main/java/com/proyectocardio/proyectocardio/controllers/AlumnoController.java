@@ -18,7 +18,7 @@ import com.proyectocardio.proyectocardio.services.IAlumnoService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/alumnos")
+@RequestMapping("/cardio/menuPrincipal/alumnos")
 public class AlumnoController {
 
      @Autowired

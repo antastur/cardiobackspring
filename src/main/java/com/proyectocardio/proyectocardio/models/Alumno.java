@@ -2,6 +2,8 @@ package com.proyectocardio.proyectocardio.models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +39,7 @@ public class Alumno {
     private String apellidos;
    
     @ManyToOne
+    @JsonBackReference(value="formacion-alumno")
     @JoinColumn(name = "FK_FORMACION", updatable = true, nullable = true)
     private Formacion formacion;
 

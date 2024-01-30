@@ -4,6 +4,8 @@ package com.proyectocardio.proyectocardio.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,9 +35,11 @@ public class Curso {
     private String nombre;
     
     @OneToMany(mappedBy = "curso")
+    @JsonBackReference(value="curso-formacion")
     private List<Formacion> formaciones;
 
     @ManyToOne
+    @JsonBackReference(value="cliente-curso")
     @JoinColumn(name = "FK_CLIENTE", updatable = true, nullable = true)
     private Cliente cliente;
 
