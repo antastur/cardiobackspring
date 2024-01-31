@@ -101,7 +101,8 @@ public class Equipo {
     @Column(name="senaletica")
     private Boolean senaletica;
 
-   
+    @Column(name="asignado")
+    private Boolean asignado;
 
   
     

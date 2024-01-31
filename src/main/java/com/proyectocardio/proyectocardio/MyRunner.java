@@ -99,7 +99,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo1.setSenaletica(false);
         equipo1.setCondicionUsado(false);
         equipo1.setDocUsoCreada(false);
-
+        equipo1.setAsignado(false);
         //equipoRepositorio.save(equipo1);
 
 
@@ -125,6 +125,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo2.setSenaletica(false);
         equipo2.setCondicionUsado(false);
         equipo2.setDocUsoCreada(false);
+        equipo2.setAsignado(false);
         //equipoRepositorio.save(equipo2);
 
 
@@ -151,6 +152,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo3.setSenaletica(false);
         equipo3.setCondicionUsado(false);
         equipo3.setDocUsoCreada(false);
+        equipo3.setAsignado(false);
         //equipoRepositorio.save(equipo3);
 
 
@@ -176,6 +178,8 @@ public class MyRunner  implements CommandLineRunner{
         equipo4.setSenaletica(false);
         equipo4.setCondicionUsado(false);
         equipo4.setDocUsoCreada(false);
+        equipo4.setAsignado(false);
+
         //equipoRepositorio.save(equipo4);
 
 
@@ -201,6 +205,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo5.setSenaletica(false);
         equipo5.setCondicionUsado(false);
         equipo5.setDocUsoCreada(false);
+        equipo5.setAsignado(false);
         //equipoRepositorio.save(equipo5);
 
 
@@ -226,6 +231,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo6.setSenaletica(false);
         equipo6.setCondicionUsado(false);
         equipo6.setDocUsoCreada(false);
+        equipo6.setAsignado(false);
         //equipoRepositorio.save(equipo6);
 
         Equipo equipo7=new Equipo();
@@ -250,6 +256,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo7.setSenaletica(false);
         equipo7.setCondicionUsado(false);
         equipo7.setDocUsoCreada(false);
+        equipo7.setAsignado(false);
         //equipoRepositorio.save(equipo7);
 
         Equipo equipo8=new Equipo();
@@ -274,6 +281,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo8.setSenaletica(false);
         equipo8.setCondicionUsado(false);
         equipo8.setDocUsoCreada(false);
+        equipo8.setAsignado(false);
         //equipoRepositorio.save(equipo8);
 
         Equipo equipo9=new Equipo();
@@ -298,6 +306,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo9.setSenaletica(false);
         equipo9.setCondicionUsado(false);
         equipo9.setDocUsoCreada(false);
+        equipo9.setAsignado(false);
         //equipoRepositorio.save(equipo9);
 
 
@@ -323,6 +332,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo10.setSenaletica(false);
         equipo10.setCondicionUsado(false);
         equipo10.setDocUsoCreada(false);
+        equipo10.setAsignado(false);
        
       Cliente alumasa= new Cliente();
 
