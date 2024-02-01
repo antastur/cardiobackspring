@@ -50,6 +50,7 @@ public class EquipoService implements IEquipoService{
           equip.setCondicionUsado(equipo.getCondicionUsado());
           equip.setDocUsoCreada(equipo.getDocUsoCreada());
           equip.setSenaletica(equipo.getSenaletica());
+          equip.setAsignado(equip.getAsignado());
         
          Equipo updatedEquipo=this.equipoRepositorio.save(equip);
          return updatedEquipo;

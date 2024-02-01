@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.proyectocardio.proyectocardio.models.Cliente;
+import com.proyectocardio.proyectocardio.models.Curso;
+import com.proyectocardio.proyectocardio.models.Espacio;
 
 
 @Service
@@ -15,4 +17,6 @@ public interface IClienteService {
     public Cliente cambiarCliente(Long id,Cliente cliente);
     public Boolean borrarCliente(Long id);
     public Cliente  getCliente(Long id);
+    public List<Espacio> getEspaciosdeUnCliente(Long id);
+    public List<Curso> getCursosdeUnCliente(Long id);
 }

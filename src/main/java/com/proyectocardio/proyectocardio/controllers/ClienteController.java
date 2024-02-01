@@ -14,15 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.proyectocardio.proyectocardio.models.Cliente;
+import com.proyectocardio.proyectocardio.models.Curso;
+import com.proyectocardio.proyectocardio.models.Equipo;
+import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.services.IClienteService;
+import com.proyectocardio.proyectocardio.services.IEquipoService;
 
 @CrossOrigin(origins = "http://localhost:4200,http://localhost:8080")
 @RestController
-@RequestMapping("/cardio/menuPrincipal/clientes")
+@RequestMapping("/cardio/menuPrincipal")
 public class ClienteController {
 
      @Autowired
     private  IClienteService clienteServicio;
+    private  IEquipoService equipoServicio;
    
     public ClienteController() {
         
@@ -30,27 +35,59 @@ public class ClienteController {
 
 
       //Metodo para devolver lista con objetos cliente
-    @GetMapping
+    @GetMapping("/clientes")
     public List<Cliente> servirClientes(){
     return  clienteServicio.getClientes();
 }
 
-     @GetMapping("/{id}")
+     @GetMapping("/clientes/{id}")
     public Cliente servirCliente(@PathVariable(value = "id") Long id){
         return clienteServicio.getCliente(id);
     }
 
     
-     @PostMapping
+    @GetMapping("/clientes/espacios/{id}")
+    public List<Espacio> servirEspaciosUnCliente(@PathVariable(value = "id") Long id){
+
+        return clienteServicio.getEspaciosdeUnCliente(id);
+    }
+
+
+    @GetMapping("/clientes/cursos/{id}")
+    public List<Curso> servirCursosUnCliente(@PathVariable(value = "id") Long id){
+
+        return clienteServicio.getCursosdeUnCliente(id);
+    }
+
+
+    
+     @PostMapping("/clientes")
     public void createServCliente(@RequestBody Cliente cliente) {
       
         clienteServicio.creaCliente(cliente);  
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/clientes/{id}")
      public  void updateServCliente(@PathVariable(value="id") Long id,@RequestBody Cliente cliente){
 
          clienteServicio.cambiarCliente(id, cliente); }
+
+/* 
+     @PostMapping("/equipos")
+         public void createServEquipo(@RequestBody Equipo equipo) {
+           
+             equipoServicio.creaEquipo(equipo);  
+         }
+     
+     
+     @PutMapping("/equipos/{id}")
+          public  void updateServEquipo(@PathVariable(value="id") Long id,@RequestBody Equipo equipo){
+     
+              equipoServicio.cambiarEquipo(id, equipo);
+            }
+
+
+*/
 
 }
