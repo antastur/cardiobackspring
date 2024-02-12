@@ -26,6 +26,8 @@ public class ClienteService implements IClienteService{
     private EspacioRepository espacioRepositorio;
     private LugarRepository lugarRepositorio;
     private EquipoRepository equipoRepositorio;
+    
+    
     ClienteService(){}
 
 
@@ -37,11 +39,15 @@ public class ClienteService implements IClienteService{
         return clientes;
     }
 
+
+
     @Override
     public Cliente creaCliente(@RequestBody Cliente cliente) {
       // Metodo para crear un cliente en BD
       return this.clienteRepositorio.save(cliente);
     }
+
+
 
     @Override
     public Cliente cambiarCliente(Long id, Cliente cliente) {
@@ -49,35 +55,36 @@ public class ClienteService implements IClienteService{
        
        Cliente clien=this.clienteRepositorio.findById(id).get();
        
-       clien.setCif(clien.getCif());
-       clien.setNombEmp(clien.getNombEmp());
-       clien.setNombre(clien.getNombre());
-       clien.setApellidos(clien.getApellidos());
-       clien.setDni(clien.getDni());
-       clien.setDireccionFiscal(clien.getDireccionFiscal());
+       clien.setCif(cliente.getCif());
+       clien.setNombEmp(cliente.getNombEmp());
+       clien.setNombre(cliente.getNombre());
+       clien.setApellidos(cliente.getApellidos());
+       clien.setDni(cliente.getDni());
+       clien.setDireccionFiscal(cliente.getDireccionFiscal());
 
-       clien.setComercial(clien.getComercial());
-       clien.setCurso(clien.getCurso());
-       clien.setEspacio(clien.getEspacio());
+       clien.setComercial(cliente.getComercial());
+       clien.setCurso(cliente.getCurso());
+       clien.setEspacio(cliente.getEspacio());
 
-       List<Espacio> espacios=(ArrayList) clien.getEspacio();
-       List<Lugar> lugares=new ArrayList() ;
+       List<Espacio> espacios=new ArrayList<Espacio>();
+       espacios.addAll( cliente.getEspacio());
+       List<Lugar> lugares=new ArrayList<Lugar>() ;
+       
        for (Espacio espacio : espacios) {
         
         espacio.setCliente(cliente);
-        lugares=(ArrayList<Lugar>) espacio.getLugares();
+        lugares.addAll(espacio.getLugares());
         for (Lugar lugar: lugares){
-           
-        } 
-        
+           lugar.setEspacio(espacio);
+         } 
+
        }
       
-
-
-
        Cliente updatedCliente=this.clienteRepositorio.save(clien);
        return updatedCliente;
     }
+
+
 
     @Override
     public Boolean borrarCliente(Long id) {
@@ -96,6 +103,8 @@ public class ClienteService implements IClienteService{
         return borrado;
     }
 
+
+
     @Override
     public Cliente getCliente(Long id) {
         // Metodo para encontrar un alumno en concreto segun su id
@@ -110,6 +119,7 @@ public class ClienteService implements IClienteService{
     }
 
    
+
    
     public Equipo creaEquipo(Equipo equipo) {
         // Metodo para crear un equipo en BD
@@ -155,6 +165,8 @@ public class ClienteService implements IClienteService{
         espacios.addAll(cliente.getEspacio());
         return espacios;
     }
+
+
 
 
     @Override

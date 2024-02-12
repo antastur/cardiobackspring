@@ -41,6 +41,16 @@ public class EquipoController {
     }
 
 
+    //Metodo para devolver lista con objetos alumno
+    @GetMapping("/asignados")
+    public List<Equipo> servirEquiposNoAsignados( ){
+    return  equipoServicio.getEquiposNoAsignados(false);
+}
+
+
+
+
+
      @PostMapping
     public void createServEquipo(@RequestBody Equipo equipo) {
       

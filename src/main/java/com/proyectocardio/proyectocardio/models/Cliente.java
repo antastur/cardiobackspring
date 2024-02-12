@@ -30,7 +30,7 @@ public class Cliente {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="cif")
+    @Column(name="cif",nullable=false, unique=true)
     private String cif;
 
     @Column(name="nombEmp")

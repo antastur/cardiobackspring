@@ -13,4 +13,5 @@ public interface IEquipoService {
     public Equipo cambiarEquipo(Long id,Equipo equipo);
     public Boolean borrarEquipo(Long id);
     public Equipo  getEquipo(Long id);
+    public List<Equipo> getEquiposNoAsignados(Boolean asignado);
 }

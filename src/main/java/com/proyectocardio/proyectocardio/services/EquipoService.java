@@ -90,6 +90,12 @@ public class EquipoService implements IEquipoService{
 
     }
 
+    @Override
+    public List<Equipo> getEquiposNoAsignados(Boolean asignado) {
+       List<Equipo> equipos= this.equipoRepositorio.findByAsignado(asignado);
+       return equipos;
+    }
+
 
 
 }

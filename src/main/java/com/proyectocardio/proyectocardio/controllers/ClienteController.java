@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,6 +73,14 @@ public class ClienteController {
      public  void updateServCliente(@PathVariable(value="id") Long id,@RequestBody Cliente cliente){
 
          clienteServicio.cambiarCliente(id, cliente); }
+
+
+    @DeleteMapping("/clientes/{id}")
+    public Boolean deleteServCliente(@PathVariable(value="id") Long id){
+        
+          return clienteServicio.borrarCliente(id);
+     }
+     
 
 /* 
      @PostMapping("/equipos")

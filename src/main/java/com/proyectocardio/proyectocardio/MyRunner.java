@@ -337,8 +337,8 @@ public class MyRunner  implements CommandLineRunner{
       Cliente alumasa= new Cliente();
 
       alumasa.setCif("A12223111");
-      alumasa.setNombEmp("Antonio");
-      alumasa.setNombre("Alumasa SA");
+      alumasa.setNombEmp("Alumasa SA");
+      alumasa.setNombre("Antonio");
       alumasa.setApellidos("Depedro Perez");
       alumasa.setDni("12322333i");
       alumasa.setDireccionFiscal("C/Alameda 21 1C 50002 Zaragoza");
@@ -347,8 +347,8 @@ public class MyRunner  implements CommandLineRunner{
       Cliente ferrosa= new Cliente();
 
       ferrosa.setCif("A45667788");
-      ferrosa.setNombEmp("Raul");
-      ferrosa.setNombre("Ferrosa SA");
+      ferrosa.setNombEmp("Ferrosa SA");
+      ferrosa.setNombre("Raul");
       ferrosa.setApellidos("Quino Laiz");
       ferrosa.setDni("14786634s");
       ferrosa.setDireccionFiscal("C/Ronda 36 6C 32018 Madrid");
@@ -357,8 +357,8 @@ public class MyRunner  implements CommandLineRunner{
       Cliente transina= new Cliente();
 
       transina.setCif("A13560989");
-      transina.setNombre("Transina SA");
-      transina.setNombEmp("Juan");
+      transina.setNombre("Juan");
+      transina.setNombEmp("Transina SA");
       transina.setApellidos("Perez Sanz");
       transina.setDni("16887352h");
       transina.setDireccionFiscal("C/Tornasol 2 1E 33534 Madrid");
@@ -367,8 +367,8 @@ public class MyRunner  implements CommandLineRunner{
       Cliente balay= new Cliente();
 
       balay.setCif("A44561234");
-      balay.setNombEmp("Jaime");
-      balay.setNombre("Balay SA");
+      balay.setNombEmp("Balay SA");
+      balay.setNombre("Jaime");
       balay.setApellidos("Almonte Ruina");
       balay.setDni("11138943p");
       balay.setDireccionFiscal("C/Sta Isabel 217  50320 Zaragoza");
