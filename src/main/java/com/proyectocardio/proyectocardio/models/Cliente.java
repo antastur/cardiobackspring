@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -55,7 +56,6 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference(value="cliente-espacio")
     private Set<Espacio> espacio;
-    
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference(value="cliente-curso")
     private Set<Curso> curso;

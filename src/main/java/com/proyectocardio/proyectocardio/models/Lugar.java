@@ -38,6 +38,6 @@ public class Lugar {
 
     @ManyToOne
     @JsonBackReference(value="espacio-lugar")
-    @JoinColumn(name = "FK_ESPACIO", updatable = true, nullable = true)
+    @JoinColumn(name = "FK_ESPACIO", updatable = true, nullable = false)
     private Espacio espacio;
 }
