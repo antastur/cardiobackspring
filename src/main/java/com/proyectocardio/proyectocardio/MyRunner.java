@@ -428,31 +428,37 @@ public class MyRunner  implements CommandLineRunner{
       nave1.setUbicacion("almacen edificio3");
       nave1.setEspacio(espacio1);
       nave1.setEquipo(equipo1);
+      equipo1.setAsignado(true);
 
       Lugar nave2=new Lugar();
       nave2.setUbicacion("recepcion");
       nave2.setEspacio(espacio2);
       nave2.setEquipo(equipo4);
+      equipo4.setAsignado(true);
 
       Lugar nave3=new Lugar();
       nave3.setUbicacion("oficinas planta 2");
       nave3.setEspacio(espacio3);
       nave3.setEquipo(equipo5);
+      equipo5.setAsignado(true);
 
       Lugar nave4=new Lugar();
       nave4.setUbicacion("almacen");
       nave4.setEspacio(espacio4);
       nave4.setEquipo(equipo6);
+      equipo6.setAsignado(true);
 
       Lugar nave5=new Lugar();
       nave5.setUbicacion("recepcion");
       nave5.setEspacio(espacio5);
       nave5.setEquipo(equipo7);
+      equipo7.setAsignado(true);
      
       Vehiculo vehiculo1=new Vehiculo();
       vehiculo1.setUbicacion("vehiculo1 en parking");
       vehiculo1.setEspacio(espacio1);
       vehiculo1.setEquipo(equipo2);
+      equipo2.setAsignado(true);
       vehiculo1.setMarca("SEAT");
       vehiculo1.setModelo("ALHAMBRA");
       vehiculo1.setMatricula("0788GGH");
@@ -464,6 +470,7 @@ public class MyRunner  implements CommandLineRunner{
       vehiculo2.setUbicacion("vehiculo2 en parking");
       vehiculo2.setEspacio(espacio1);
       vehiculo2.setEquipo(equipo3);
+      equipo3.setAsignado(true);
       vehiculo2.setMarca("FORD");
       vehiculo2.setModelo("TRANSIT");
       vehiculo2.setMatricula("5678PLK");
@@ -474,6 +481,7 @@ public class MyRunner  implements CommandLineRunner{
       vehiculo3.setUbicacion("vehiculo1 en parking");
       vehiculo3.setEspacio(espacio5);
       vehiculo3.setEquipo(equipo8);
+      equipo8.setAsignado(true);
       vehiculo3.setMarca("FORD");
       vehiculo3.setModelo("TRANSIT");
       vehiculo3.setMatricula("4766BBZ");

@@ -1,5 +1,6 @@
 package com.proyectocardio.proyectocardio.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,8 +93,48 @@ public class EquipoService implements IEquipoService{
 
     @Override
     public List<Equipo> getEquiposNoAsignados(Boolean asignado) {
-       List<Equipo> equipos= this.equipoRepositorio.findByAsignado(asignado);
+       List<Equipo> equipos= this.equipoRepositorio.findByAsignado(false);
        return equipos;
+    }
+
+    @Override
+    public List<Equipo> findByAsignado(Boolean asignado) {
+        List<Equipo> equipos=  this.equipoRepositorio.findByAsignado(true);
+        return equipos;
+    }
+
+    @Override
+    public Long countByRefCabina(String refCabina) {
+       return this.equipoRepositorio.countByRefCabina("exterior");
+    }
+    @Override
+    public Long countByAsignado(Boolean asignado) {
+        return this.equipoRepositorio.countByAsignado(false);
+    }
+
+    @Override
+    public Long countByCondicionUsado(Boolean condicionUsado) {
+        return this.equipoRepositorio.countByCondicionUsado(true);
+    }
+
+    @Override
+    public Long countByFechaCaducidadBetween(LocalDate from, LocalDate fechaCaducidad) {
+        return this.equipoRepositorio.countByFechaCaducidadBetween(LocalDate.now(),fechaCaducidad );
+    }
+
+    @Override
+    public List<Equipo> findByRefCabina(Boolean asignado) {
+        return null;
+    }
+
+    @Override
+    public List<Equipo> findByCondicionUsado(Boolean asignado) {
+        return null;
+    }
+
+    @Override
+    public List<Equipo> findByFechaCaducidadBetween(LocalDate from, LocalDate to) {
+        return null;
     }
 
 
