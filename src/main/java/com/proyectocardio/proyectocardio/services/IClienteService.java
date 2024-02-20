@@ -15,8 +15,9 @@ public interface IClienteService {
     public List<Cliente> getClientes();
     public Cliente creaCliente(Cliente cliente);
     public Cliente cambiarCliente(Long id,Cliente cliente);
-    public Boolean borrarCliente(Long id);
+    public void borrarCliente(Cliente cliente);
     public Cliente  getCliente(Long id);
     public List<Espacio> getEspaciosdeUnCliente(Long id);
     public List<Curso> getCursosdeUnCliente(Long id);
+    boolean existsClienteById(Long id);
 }

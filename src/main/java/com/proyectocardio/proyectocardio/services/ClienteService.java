@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Curso;
@@ -16,6 +21,8 @@ import com.proyectocardio.proyectocardio.repositories.ClienteRepository;
 import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
 import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
 import com.proyectocardio.proyectocardio.repositories.LugarRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteService implements IClienteService{
@@ -31,7 +38,7 @@ public class ClienteService implements IClienteService{
     ClienteService(){}
 
 
-
+    
     @Override
     public List<Cliente> getClientes() {
        // Metodo para obtener todos los clientes de BD
@@ -40,7 +47,7 @@ public class ClienteService implements IClienteService{
     }
 
 
-
+    
     @Override
     public Cliente creaCliente(@RequestBody Cliente cliente) {
       // Metodo para crear un cliente en BD
@@ -48,7 +55,7 @@ public class ClienteService implements IClienteService{
     }
 
 
-
+   
     @Override
     public Cliente cambiarCliente(Long id, Cliente cliente) {
        // Metodo para modificar un cliente en BD
@@ -85,8 +92,13 @@ public class ClienteService implements IClienteService{
     }
 
 
-
     @Override
+    public void borrarCliente(Cliente cliente) {
+       clienteRepositorio.delete(cliente);
+       
+    }
+   
+  /*  @Override
     public Boolean borrarCliente(Long id) {
        // Metodo para eliminar un cliente de BD
         Cliente cliente;
@@ -103,24 +115,17 @@ public class ClienteService implements IClienteService{
         return borrado;
     }
 
-
-
+*/ 
+    
     @Override
     public Cliente getCliente(Long id) {
         // Metodo para encontrar un alumno en concreto segun su id
-        Optional < Cliente> op= this.clienteRepositorio.findById(id);
-        Cliente cl=null;
-            if(op.isPresent()){
-                cl=op.get();
-                return cl;
-            }else{
-                return null;
-            }
+        return clienteRepositorio.findById(id).orElse(null);
     }
 
    
 
-   
+    
     public Equipo creaEquipo(Equipo equipo) {
         // Metodo para crear un equipo en BD
         return this.equipoRepositorio.save(equipo);
@@ -128,7 +133,7 @@ public class ClienteService implements IClienteService{
 
 
 
-    
+   
     public Equipo cambiarEquipo(Long id, Equipo equipo) {
          // Metodo para modificar un equipo en BD
          Equipo equip=this.equipoRepositorio.findById(id).get();
@@ -156,7 +161,7 @@ public class ClienteService implements IClienteService{
     }
 
 
-
+   
     @Override
     public List<Espacio> getEspaciosdeUnCliente(Long id) {
         
@@ -168,7 +173,7 @@ public class ClienteService implements IClienteService{
 
 
 
-
+   
     @Override
     public List<Curso> getCursosdeUnCliente(Long id) {
         
@@ -177,6 +182,17 @@ public class ClienteService implements IClienteService{
         cursos.addAll(cliente.getCurso());
         return cursos;
     }
+
+
+
+    @Override
+    public boolean existsClienteById(Long id) {
+        return existsClienteById( id);
+    }
+
+
+
+   
 
 
 }

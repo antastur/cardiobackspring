@@ -18,5 +18,5 @@ public interface IEspacioService {
     public Boolean borrarEspacio(Long id);
     public Espacio getEspacio(Long id);
     public List<Lugar> getLugaresdeUnEspacio(Long id);
-
+    public List<Vehiculo> getVehiculosdeUnEspacio(Long id);
 }

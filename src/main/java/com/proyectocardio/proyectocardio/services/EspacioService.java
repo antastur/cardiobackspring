@@ -14,6 +14,7 @@ import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.models.Vehiculo;
 import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
 import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
+import com.proyectocardio.proyectocardio.repositories.VehiculoRepository;
 
 @Service
 public class EspacioService implements IEspacioService{
@@ -22,6 +23,8 @@ public class EspacioService implements IEspacioService{
 
      @Autowired
     private EspacioRepository espacioRepositorio;
+    @Autowired
+    private VehiculoRepository vehiculoRepositorio;
 
     EspacioService(){}
    
@@ -109,6 +112,15 @@ public class EspacioService implements IEspacioService{
 
       }
 
+
+    @Override
+    public List<Vehiculo> getVehiculosdeUnEspacio(Long id) {
+        Espacio espacio=this.getEspacio(id);
+        List<Vehiculo> vehiculos= new ArrayList<Vehiculo>();
+        vehiculos=this.vehiculoRepositorio.findAllByEspacio(espacio);
+
+        return vehiculos;
+    }
 
 
 

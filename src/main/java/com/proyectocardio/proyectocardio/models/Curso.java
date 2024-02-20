@@ -14,10 +14,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Entity
 @Setter
@@ -31,6 +33,7 @@ public class Curso {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message="Ingresa Nombre del curso")
     @Column(name="nombre")
     private String nombre;
     

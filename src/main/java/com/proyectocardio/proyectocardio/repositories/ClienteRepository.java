@@ -8,4 +8,5 @@ import com.proyectocardio.proyectocardio.models.Cliente;
 @Repository
 public interface ClienteRepository extends  JpaRepository<Cliente,Long> {
 
+    boolean existsClienteById(Long id);
 }

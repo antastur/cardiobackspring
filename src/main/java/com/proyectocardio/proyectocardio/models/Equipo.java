@@ -18,10 +18,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+
 
 @Entity
 @Setter
@@ -30,11 +33,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Equipo {
 
+
+
     @Id
     @Column(name="id")
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message="Ingresa número de serie")
     @Column(name="numSerie")
     private String numSerie;
 

@@ -21,18 +21,20 @@ import com.proyectocardio.proyectocardio.services.ICursoService;
 import com.proyectocardio.proyectocardio.services.IformacionService;
 
 
-
+//Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200,http://localhost:8080")
 @RestController
 @RequestMapping("/cardio/menuPrincipal")
 public class CursoController  {
 
 
+    //Inyeccion de servicios
      @Autowired
      private ICursoService cursoServicio ;
      private IformacionService formacionService ;
      private CursoRepository alumnoRepository ;
     
+     //Constructor
      public CursoController() {
         
      }

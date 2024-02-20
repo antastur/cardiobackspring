@@ -23,10 +23,10 @@ public interface EquipoRepository extends  JpaRepository<Equipo,Long> {
    List<Equipo> findByAsignado(Boolean asignado);
    List<Equipo> findByCondicionUsado(Boolean asignado);
    List<Equipo> findByRefCabina(String refCabina);
-   List<Equipo> findByFechaCaducidadBetween(@Param("from")LocalDate from,@Param("to")LocalDate to);
-   Long  countByRefCabina(String refCabina);
-   Long  countByAsignado(Boolean asignado);
-   Long  countByCondicionUsado(Boolean condicionUsado);
-   Long countByFechaCaducidadBetween(@Param("from")LocalDate from,@Param("to")LocalDate to);
+   List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad);
+
+   //@Query( value="select e from Equipo e where e.fechaCaducidad < ?1")
+   //public List<Equipo> findByFechaCaducidad(LocalDate localDate);
+   
     
 }

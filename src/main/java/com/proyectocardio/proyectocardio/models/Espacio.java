@@ -17,10 +17,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Entity
 @Setter
@@ -36,6 +39,7 @@ public class Espacio  {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message="Ingresa la direccion")
     @Column(name="direccion")
     private String direccion;
 
@@ -45,12 +49,13 @@ public class Espacio  {
     @Column(name="numTelef")
     private String numTelef;
 
+    @Email
     @Column(name="email")
     private String email;
     
     @Temporal(TemporalType.DATE)
     //@DateTimeFormat(iso=ISO.DATE)
-    @Nonnull
+    @NotNull
     @Column(name="fechRegDga")
     private LocalDate fechRegDga;
 

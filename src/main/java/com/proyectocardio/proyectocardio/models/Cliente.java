@@ -14,10 +14,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Entity
 @Setter
@@ -31,7 +33,8 @@ public class Cliente {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="cif",nullable=false, unique=true)
+    @NotNull(message="Ingresa CIF")
+    @Column(name="cif", unique=true)
     private String cif;
 
     @Column(name="nombEmp")

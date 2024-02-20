@@ -1,9 +1,11 @@
 package com.proyectocardio.proyectocardio.services;
 
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import com.proyectocardio.proyectocardio.models.Equipo;
 import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
@@ -11,11 +13,15 @@ import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
 @Service
 public class EquipoService implements IEquipoService{
 
+    LocalDate localDate;
 
     @Autowired
     private EquipoRepository equipoRepositorio;
 
-    EquipoService(){}
+    EquipoService(){
+
+        this.localDate=LocalDate.now();
+    }
    
     @Override
     public List<Equipo> getEquipos() {
@@ -103,39 +109,41 @@ public class EquipoService implements IEquipoService{
         return equipos;
     }
 
-    @Override
-    public Long countByRefCabina(String refCabina) {
-       return this.equipoRepositorio.countByRefCabina("exterior");
-    }
-    @Override
-    public Long countByAsignado(Boolean asignado) {
-        return this.equipoRepositorio.countByAsignado(false);
-    }
-
-    @Override
-    public Long countByCondicionUsado(Boolean condicionUsado) {
-        return this.equipoRepositorio.countByCondicionUsado(true);
-    }
-
-    @Override
-    public Long countByFechaCaducidadBetween(LocalDate from, LocalDate fechaCaducidad) {
-        return this.equipoRepositorio.countByFechaCaducidadBetween(LocalDate.now(),fechaCaducidad );
-    }
+  
 
     @Override
     public List<Equipo> findByRefCabina(Boolean asignado) {
-        return null;
+        List<Equipo> equipos=  this.equipoRepositorio.findByRefCabina("exterior");
+        return equipos;
     }
 
     @Override
     public List<Equipo> findByCondicionUsado(Boolean asignado) {
-        return null;
+        List<Equipo> equipos=  this.equipoRepositorio.findByCondicionUsado(true);
+        return equipos;
     }
 
     @Override
-    public List<Equipo> findByFechaCaducidadBetween(LocalDate from, LocalDate to) {
-        return null;
+    public List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad) {
+        List<Equipo> equipos= this.equipoRepositorio.findByFechaCaducidadBefore(this.localDate.plusYears(1));
+        return equipos;
     }
+
+
+
+
+
+
+
+    
+ /*   @Override
+    public List<Equipo> findByFechaCaducidad(LocalDate localDate) {
+        return this.findByFechaCaducidad(LocalDate.now().plusYears(1));
+    }  */
+    
+
+
+
 
 
 

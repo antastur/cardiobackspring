@@ -15,16 +15,18 @@ import com.proyectocardio.proyectocardio.models.Vehiculo;
 import com.proyectocardio.proyectocardio.services.ILugarService;
 import com.proyectocardio.proyectocardio.services.IVehiculoService;
 
+//Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cardio/menuPrincipal/vehiculos")
 public class VehiculoController {
 
 
-
-   @Autowired
+    //Inyeccion de servicios
+    @Autowired
     private  IVehiculoService vehiculoServicio;
    
+    //Constructor
     public VehiculoController() {
         
     }

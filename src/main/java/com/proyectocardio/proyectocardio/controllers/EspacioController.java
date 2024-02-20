@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.proyectocardio.proyectocardio.models.Curso;
-import com.proyectocardio.proyectocardio.models.Equipo;
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
-import com.proyectocardio.proyectocardio.services.IEquipoService;
+import com.proyectocardio.proyectocardio.models.Vehiculo;
 import com.proyectocardio.proyectocardio.services.IEspacioService;
 
+//Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cardio/menuPrincipal/espacios")
 public class EspacioController {
 
-      @Autowired
+    //Inyeccion de servicios
+    @Autowired
     private  IEspacioService espacioServicio;
    
+    //Constructor
     public EspacioController() {
         
     }
@@ -54,6 +54,11 @@ public class EspacioController {
     }
 
 
+    @GetMapping("/vehiculos/{id}")
+    public List<Vehiculo> servirVehiculosUnEspacio(@PathVariable(value = "id") Long id){
+          
+        return espacioServicio.getVehiculosdeUnEspacio(id);
+    }
 
 
 

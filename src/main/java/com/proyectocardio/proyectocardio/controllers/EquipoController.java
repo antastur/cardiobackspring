@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.proyectocardio.proyectocardio.models.Equipo;
 import com.proyectocardio.proyectocardio.services.IEquipoService;
 
+//Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cardio/menuPrincipal/equipos")
 public class EquipoController {
 
+    //Inyeccion de servicios
     @Autowired
     private  IEquipoService equipoServicio;
    
+    //Constructor
     public EquipoController() {
         
     }

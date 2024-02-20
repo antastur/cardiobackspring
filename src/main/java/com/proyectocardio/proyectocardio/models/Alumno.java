@@ -2,6 +2,8 @@ package com.proyectocardio.proyectocardio.models;
 
 
 
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -12,10 +14,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Entity
 @Setter
@@ -29,6 +33,8 @@ public class Alumno {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
+    @NotNull(message = "Has de ingresar DNI")
     @Column(name="dniAlumno")
     private String dniAlumno;
 

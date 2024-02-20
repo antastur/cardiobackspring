@@ -24,6 +24,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,13 +47,15 @@ public class Formacion {
 
     @Temporal(TemporalType.DATE)
     //@DateTimeFormat(iso=ISO.DATE)
-    @Nonnull
+   // @Future
+    @NotNull(message="Ingresa día de la formación")
     @Column(name="dateFormacion")
     private LocalDate dateFormacion;
 
     @Temporal(TemporalType.DATE)
     //@DateTimeFormat(iso=ISO.DATE)
     @Nonnull
+    //@Future
     @Column(name="recuerdo")
     private LocalDate recuerdo;
 

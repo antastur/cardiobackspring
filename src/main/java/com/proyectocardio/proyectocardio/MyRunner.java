@@ -32,14 +32,16 @@ import com.proyectocardio.proyectocardio.repositories.FormacionRepository;
 import com.proyectocardio.proyectocardio.repositories.LugarRepository;
 import com.proyectocardio.proyectocardio.repositories.VehiculoRepository;
 
-//import jakarta.transaction.Transactional;
 
 
+//Haciendo que la clase sea ejecutable
 @Component
 public class MyRunner  implements CommandLineRunner{
 
+   //Preparando log para recibir informacion
     private static final Logger logger = LoggerFactory.getLogger(MyRunner.class);
     
+    //Declaracion de  repositorios
     private final AlumnoRepository alumnoRepositorio;
     private final EquipoRepository equipoRepositorio;
     private final CursoRepository cursoRepositorio;
@@ -51,7 +53,7 @@ public class MyRunner  implements CommandLineRunner{
     private final EspacioRepository espacioRepositorio;
 
 
-    
+    //Inyeccion de repositorios en constructor
     public MyRunner(AlumnoRepository alumnoRepositorio,EquipoRepository equipoRepositorio,CursoRepository cursoRepositorio,ClienteRepository clienteRepositorio,
                     DiplomaRepository diplomaRepositorio,FormacionRepository formacionRepositorio,VehiculoRepository vehiculoRepositorio,
                     LugarRepository lugarRepositorio,EspacioRepository espacioRepositorio) {
@@ -333,7 +335,8 @@ public class MyRunner  implements CommandLineRunner{
         equipo10.setCondicionUsado(false);
         equipo10.setDocUsoCreada(false);
         equipo10.setAsignado(false);
-       
+      
+        //Persistencia de clientes
       Cliente alumasa= new Cliente();
 
       alumasa.setCif("A12223111");
@@ -375,7 +378,7 @@ public class MyRunner  implements CommandLineRunner{
       balay.setComercial("Unai Val");
 
 
-
+      //Persistencia de espacios
       Espacio espacio1=new Espacio();
       espacio1.setCliente(alumasa);
       espacio1.setDireccion("c/Francisco Victoria 26 50012 Zaragoza");
@@ -423,7 +426,7 @@ public class MyRunner  implements CommandLineRunner{
 
       
       
-
+//Persistencia de lugares
       Lugar nave1=new Lugar();
       nave1.setUbicacion("almacen edificio3");
       nave1.setEspacio(espacio1);
@@ -453,7 +456,8 @@ public class MyRunner  implements CommandLineRunner{
       nave5.setEspacio(espacio5);
       nave5.setEquipo(equipo7);
       equipo7.setAsignado(true);
-     
+      
+      //Persistencia de vehiculos
       Vehiculo vehiculo1=new Vehiculo();
       vehiculo1.setUbicacion("vehiculo1 en parking");
       vehiculo1.setEspacio(espacio1);
@@ -490,7 +494,7 @@ public class MyRunner  implements CommandLineRunner{
      
      
      
-     
+     //Persistencia de cursos
       Curso curso1=new Curso();
       curso1.setCliente(alumasa);
       curso1.setNombre("alumasagrupo1");
@@ -511,6 +515,7 @@ public class MyRunner  implements CommandLineRunner{
       curso5.setCliente(balay);
       curso5.setNombre("balaygrupo1");
 
+      //persistencia de diplomas
       Diploma diplomaal11=new Diploma();
       Diploma diplomaal12=new Diploma();
       Diploma diplomaal21=new Diploma();
@@ -525,7 +530,7 @@ public class MyRunner  implements CommandLineRunner{
       Diploma diplomaba22=new Diploma();
      
       
-      
+      //Persistencia de formaciones
       Formacion formacional1=new Formacion();
       Formacion formacional2=new Formacion();
       Formacion formacionfe=new Formacion();
@@ -554,7 +559,7 @@ public class MyRunner  implements CommandLineRunner{
 
       
      
-      
+      //Persistencia de alumnos
       Alumno alumno1=new Alumno();
       alumno1.setDniAlumno("12345987h");
       alumno1.setNombre("Alejandro");
