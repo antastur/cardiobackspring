@@ -26,10 +26,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Vehiculo extends Lugar {
 
-    @Id
+   /*  @Id
     @Column(name="id")
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; */
 
  
     @Column(name="marca")
@@ -43,8 +43,7 @@ public class Vehiculo extends Lugar {
     private String matricula;
 
 
-    @Column(name="telefono")
-    private String telefono;
+    
 
    
 

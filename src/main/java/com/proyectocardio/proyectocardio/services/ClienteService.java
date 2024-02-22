@@ -2,15 +2,8 @@ package com.proyectocardio.proyectocardio.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Curso;
@@ -19,66 +12,64 @@ import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.repositories.ClienteRepository;
 import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
-import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
-import com.proyectocardio.proyectocardio.repositories.LugarRepository;
 
-import jakarta.transaction.Transactional;
+
+//Clase que implementa la interface de los servicios para las operaciones con clientes
 
 @Service
 public class ClienteService implements IClienteService{
 
-
+    //Inyección de repositorios
     @Autowired
     private ClienteRepository clienteRepositorio;
-    private EspacioRepository espacioRepositorio;
-    private LugarRepository lugarRepositorio;
     private EquipoRepository equipoRepositorio;
     
-    
+    //Constructor
     ClienteService(){}
 
 
-    
+    //Metodo que hace uso del repositorio para obtener una lista de todos los clientes de BD
     @Override
     public List<Cliente> getClientes() {
-       // Metodo para obtener todos los clientes de BD
+       
         List<Cliente> clientes=this.clienteRepositorio.findAll();
         return clientes;
     }
 
 
-    
+    //Método que usa repositorio para guardar un cliente en BD
     @Override
     public Cliente creaCliente(@RequestBody Cliente cliente) {
-      // Metodo para crear un cliente en BD
+     
       return this.clienteRepositorio.save(cliente);
     }
 
 
-   
+     // Metodo para modificar un cliente en BD
     @Override
     public Cliente cambiarCliente(Long id, Cliente cliente) {
-       // Metodo para modificar un cliente en BD
-       
+      
+       //Obtiene un cliente en concreto de BD usando su id
        Cliente clien=this.clienteRepositorio.findById(id).get();
        
+       //Modifica cada uno de sus atributos con los obtenidos por parametro 
        clien.setCif(cliente.getCif());
        clien.setNombEmp(cliente.getNombEmp());
        clien.setNombre(cliente.getNombre());
        clien.setApellidos(cliente.getApellidos());
        clien.setDni(cliente.getDni());
        clien.setDireccionFiscal(cliente.getDireccionFiscal());
-
        clien.setComercial(cliente.getComercial());
        clien.setCurso(cliente.getCurso());
        clien.setEspacio(cliente.getEspacio());
-
+       //Se instancia una lista de espacios y se rellena con la del cliente obtenido por parametro
        List<Espacio> espacios=new ArrayList<Espacio>();
        espacios.addAll( cliente.getEspacio());
+       //Lo mismo con una lista de lugares
        List<Lugar> lugares=new ArrayList<Lugar>() ;
-       
+       //Cada lugar a su vez tiene una lista de espacios 
        for (Espacio espacio : espacios) {
-        
+        //Se asignan esas listas obtenidas a las que pertenecen al cliente a persistir
         espacio.setCliente(cliente);
         lugares.addAll(espacio.getLugares());
         for (Lugar lugar: lugares){
@@ -86,12 +77,12 @@ public class ClienteService implements IClienteService{
          } 
 
        }
-      
+       //Se procede a persistir
        Cliente updatedCliente=this.clienteRepositorio.save(clien);
        return updatedCliente;
     }
 
-
+    // Metodo para borrar un cliente de BD
     @Override
     public void borrarCliente(Cliente cliente) {
        clienteRepositorio.delete(cliente);
@@ -116,28 +107,30 @@ public class ClienteService implements IClienteService{
     }
 
 */ 
-    
+    //Método para obtener un cliente determinado según su id
     @Override
     public Cliente getCliente(Long id) {
-        // Metodo para encontrar un alumno en concreto segun su id
+        
         return clienteRepositorio.findById(id).orElse(null);
     }
 
    
 
-    
+     // Metodo para crear un equipo en BD
     public Equipo creaEquipo(Equipo equipo) {
-        // Metodo para crear un equipo en BD
+       
         return this.equipoRepositorio.save(equipo);
     }
 
 
 
-   
+    // Metodo para modificar un equipo en BD 
     public Equipo cambiarEquipo(Long id, Equipo equipo) {
-         // Metodo para modificar un equipo en BD
+         
+        //Obtiene un equipo en concreto de BD usando su id
          Equipo equip=this.equipoRepositorio.findById(id).get();
-         equip.setNumSerie(equipo.getNumSerie());
+          //Modifica cada uno de sus atributos con los obtenidos por parametro
+          equip.setNumSerie(equipo.getNumSerie());
           equip.setMarca(equipo.getMarca());
           equip.setModelo(equipo.getModelo());
           equip.setFabricante(equipo.getFabricante());
@@ -155,36 +148,45 @@ public class ClienteService implements IClienteService{
           equip.setDocUsoCreada(equipo.getDocUsoCreada());
           equip.setSenaletica(equipo.getSenaletica());
           equip.setAsignado(equip.getAsignado());
-        
+        //Se persiste y se devuelve
          Equipo updatedEquipo=this.equipoRepositorio.save(equip);
          return updatedEquipo;
     }
 
 
-   
+
+
+    //Metodo para obtener todos los espacios de un cliente determinado elegido por su id
     @Override
     public List<Espacio> getEspaciosdeUnCliente(Long id) {
-        
+        //Se crea una lista de espacios
         List<Espacio> espacios = new ArrayList<Espacio>();
+        //Usando el repositorio se obtiene el cliente por su id
         Cliente cliente= this.clienteRepositorio.findById(id).get();
+        //Se llena la lista espacios con las de ese cliente y se devuelve
         espacios.addAll(cliente.getEspacio());
         return espacios;
     }
 
 
 
-   
+
+    //Metodo para obtener todos los cursos de un cliente determinado elegido por su id
     @Override
     public List<Curso> getCursosdeUnCliente(Long id) {
-        
+        //Se crea una lista de cursos
         List<Curso> cursos = new ArrayList<Curso>();
+        //Usando el repositorio se obtiene el cliente por su id
         Cliente cliente= this.clienteRepositorio.findById(id).get();
+        //Se llena la lista espacios con las de ese cliente y se devuelve
         cursos.addAll(cliente.getCurso());
         return cursos;
     }
 
 
 
+
+    //Método para saber si un cliente existe
     @Override
     public boolean existsClienteById(Long id) {
         return existsClienteById( id);

@@ -38,10 +38,11 @@ public class LugarService implements ILugarService{
          Lugar lug=this.lugarRepositorio.findById(id).get();
        
          lug.setUbicacion(lugar.getUbicacion());
+         lug.setTelefono(lugar.getTelefono());
          lug.setEspacio(lugar.getEspacio());
          lug.setEquipo(lugar.getEquipo());
         
-
+ 
          Lugar updatedLugar=this.lugarRepositorio.save(lug);  
          return updatedLugar; 
     }

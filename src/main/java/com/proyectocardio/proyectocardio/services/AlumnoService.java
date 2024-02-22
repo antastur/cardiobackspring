@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.proyectocardio.proyectocardio.models.Alumno;
+import com.proyectocardio.proyectocardio.models.Formacion;
 import com.proyectocardio.proyectocardio.repositories.AlumnoRepository;
 
 @Service
@@ -79,6 +80,14 @@ public class AlumnoService implements IAlumnoService{
             }else{
                 return null;
             }
+    }
+
+
+
+
+    @Override
+    public List<Alumno> findByFormacion(Formacion formacion) {
+      return null;
     }
 
 

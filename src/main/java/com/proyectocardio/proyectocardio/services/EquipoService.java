@@ -57,7 +57,7 @@ public class EquipoService implements IEquipoService{
           equip.setCondicionUsado(equipo.getCondicionUsado());
           equip.setDocUsoCreada(equipo.getDocUsoCreada());
           equip.setSenaletica(equipo.getSenaletica());
-          equip.setAsignado(equip.getAsignado());
+          equip.setAsignado(equipo.getAsignado());
         
          Equipo updatedEquipo=this.equipoRepositorio.save(equip);
          return updatedEquipo;
@@ -129,9 +129,12 @@ public class EquipoService implements IEquipoService{
         return equipos;
     }
 
+           
+    }
 
 
 
+     
 
 
 
@@ -147,4 +150,4 @@ public class EquipoService implements IEquipoService{
 
 
 
-}
+

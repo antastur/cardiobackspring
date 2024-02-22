@@ -335,6 +335,108 @@ public class MyRunner  implements CommandLineRunner{
         equipo10.setCondicionUsado(false);
         equipo10.setDocUsoCreada(false);
         equipo10.setAsignado(false);
+
+
+        Equipo equipo11=new Equipo();
+        equipo11.setNumSerie("12999543");
+        equipo11.setMarca("Vital");
+        equipo11.setModelo("Moderno");
+        equipo11.setFabricante("Phillips");
+        equipo11.setOperador("Vodafone");
+        equipo11.setPin("185544");
+        equipo11.setPuk("5467");
+        equipo11.setCodAiviago("0888");
+        equipo11.setNumtlfnoAiviago("877900987");
+        equipo11.setRefCabina("A30Exterior");
+        equipo11.setNumSerieCabina("155666");
+        fechFab = LocalDate.parse("08 04 2016", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechCad = LocalDate.parse("08 04 2024", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechEnt = LocalDate.parse("15 09 2023", DateTimeFormatter.ofPattern("dd MM yyyy")); 
+        equipo11.setFechaFabricacion(fechFab);
+        equipo11.setFechaCaducidad(fechCad);
+        equipo11.setFechaEntrega(fechEnt);
+        equipo11.setFechaMantenimiento(fechEnt.plusYears(1));
+        equipo11.setSenaletica(true);
+        equipo11.setCondicionUsado(true);
+        equipo11.setDocUsoCreada(false);
+        equipo11.setAsignado(false);
+
+
+        Equipo equipo12=new Equipo();
+        equipo12.setNumSerie("12911111");
+        equipo12.setMarca("Terra");
+        equipo12.setModelo("West");
+        equipo12.setFabricante("Hitachi");
+        equipo12.setOperador("Amena");
+        equipo12.setPin("185432");
+        equipo12.setPuk("8876");
+        equipo12.setCodAiviago("0855");
+        equipo12.setNumtlfnoAiviago("877999865");
+        equipo12.setRefCabina("A29Exterior");
+        equipo12.setNumSerieCabina("155453");
+        fechFab = LocalDate.parse("11 05 2016", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechCad = LocalDate.parse("11 05 2024", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechEnt = LocalDate.parse("15 10 2023", DateTimeFormatter.ofPattern("dd MM yyyy")); 
+        equipo12.setFechaFabricacion(fechFab);
+        equipo12.setFechaCaducidad(fechCad);
+        equipo12.setFechaEntrega(fechEnt);
+        equipo12.setFechaMantenimiento(fechEnt.plusYears(1));
+        equipo12.setSenaletica(true);
+        equipo12.setCondicionUsado(true);
+        equipo12.setDocUsoCreada(false);
+        equipo12.setAsignado(false);
+
+
+        Equipo equipo13=new Equipo();
+        equipo13.setNumSerie("12922222");
+        equipo13.setMarca("Aqua");
+        equipo13.setModelo("West");
+        equipo13.setFabricante("Hitachi");
+        equipo13.setOperador("Amena");
+        equipo13.setPin("185443");
+        equipo13.setPuk("8222");
+        equipo13.setCodAiviago("0954");
+        equipo13.setNumtlfnoAiviago("877988876");
+        equipo13.setRefCabina("A28Exterior");
+        equipo13.setNumSerieCabina("155453");
+        fechFab = LocalDate.parse("21 08 2016", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechCad = LocalDate.parse("21 08 2024", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechEnt = LocalDate.parse("01 02 2023", DateTimeFormatter.ofPattern("dd MM yyyy")); 
+        equipo13.setFechaFabricacion(fechFab);
+        equipo13.setFechaCaducidad(fechCad);
+        equipo13.setFechaEntrega(fechEnt);
+        equipo13.setFechaMantenimiento(fechEnt.plusYears(1));
+        equipo13.setSenaletica(true);
+        equipo13.setCondicionUsado(false);
+        equipo13.setDocUsoCreada(false);
+        equipo13.setAsignado(false);
+
+
+        Equipo equipo14=new Equipo();
+        equipo14.setNumSerie("12933333");
+        equipo14.setMarca("Terra");
+        equipo14.setModelo("Oest");
+        equipo14.setFabricante("Hitachi");
+        equipo14.setOperador("Vodafone");
+        equipo14.setPin("122312");
+        equipo14.setPuk("8777");
+        equipo14.setCodAiviago("0998");
+        equipo14.setNumtlfnoAiviago("877944432");
+        equipo14.setRefCabina("A30Exterior");
+        equipo14.setNumSerieCabina("155444");
+        fechFab = LocalDate.parse("11 05 2017", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechCad = LocalDate.parse("11 05 2025", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechEnt = LocalDate.parse("15 10 2023", DateTimeFormatter.ofPattern("dd MM yyyy")); 
+        equipo14.setFechaFabricacion(fechFab);
+        equipo14.setFechaCaducidad(fechCad);
+        equipo14.setFechaEntrega(fechEnt);
+        equipo14.setFechaMantenimiento(fechEnt.plusYears(1));
+        equipo14.setSenaletica(true);
+        equipo14.setCondicionUsado(true);
+        equipo14.setDocUsoCreada(false);
+        equipo14.setAsignado(false);
+
+
       
         //Persistencia de clientes
       Cliente alumasa= new Cliente();
@@ -755,6 +857,10 @@ public class MyRunner  implements CommandLineRunner{
       equipoRepositorio.save(equipo8);
       equipoRepositorio.save(equipo9);
       equipoRepositorio.save(equipo10);
+      equipoRepositorio.save(equipo11);
+      equipoRepositorio.save(equipo12);
+      equipoRepositorio.save(equipo13);
+
 
 
       lugarRepositorio.save(nave1);

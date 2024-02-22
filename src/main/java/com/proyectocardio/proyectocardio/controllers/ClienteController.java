@@ -63,7 +63,7 @@ public class ClienteController {
 
 
 
-      //Metodo y endpoint para devolver un cliente elegido por su id  
+     //Metodo y endpoint para devolver un cliente elegido por su id  
      @GetMapping("/clientes/{id}")
      public  ResponseEntity<Cliente>  servirCliente(@PathVariable(value = "id") Long id){
        Cliente cliente=clienteServicio.getCliente(id);

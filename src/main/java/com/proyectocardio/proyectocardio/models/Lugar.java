@@ -34,8 +34,12 @@ public class Lugar {
 
     @NotNull(message="Introducir ubicacion")
     @Column(name="ubicacion")
-    String ubicacion;
+    private String ubicacion;
 
+    @Column(name="telefono")
+    private String telefono;
+    
+    @JoinColumn(name = "FK_EQUIPO", updatable = true, nullable = true)
     @OneToOne
     private Equipo equipo;
 

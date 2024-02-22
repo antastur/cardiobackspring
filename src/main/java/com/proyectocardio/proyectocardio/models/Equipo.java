@@ -110,7 +110,7 @@ public class Equipo {
     @Column(name="asignado")
     private Boolean asignado;
 
-  
+
     
     /* 
     public Equipo() {

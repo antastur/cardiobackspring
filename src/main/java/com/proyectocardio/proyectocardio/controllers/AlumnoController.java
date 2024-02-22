@@ -39,12 +39,17 @@ public class AlumnoController {
 
 
 
+
+    //Metodo y endpoint para devolver un alumno elegido por su id 
     @GetMapping("/{id}")
     public Alumno servirAlumno(@PathVariable(value = "id") Long id){
         return alumnoServicio.getAlumno(id);
     }
 
 
+
+
+    //Metodo y endpoint para crear un alumno  
     @PostMapping
     public void createServAlumno(@RequestBody Alumno alumno) {
       
@@ -53,13 +58,17 @@ public class AlumnoController {
  
 
 
+
+     //Metodo y endpoint para modificar un alumno elegido por su id  
      @PutMapping("/{id}")
      public /*Alumno*/ void updateServAlumno(@PathVariable(value="id") Long id,@RequestBody Alumno alumno){
 
          alumnoServicio.cambiarAlumno(id, alumno); }
 
 
-     
+
+
+    //Metodo y endpoint para borrar un alumno elegido por su id 
     @DeleteMapping("/{id}")
      public Boolean deleteServAlumno(@PathVariable(value="id") Long id){
         

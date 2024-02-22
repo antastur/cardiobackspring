@@ -18,10 +18,10 @@ public interface IEquipoService {
     public Equipo  getEquipo(Long id);
     public List<Equipo> getEquiposNoAsignados(Boolean asignado);
 
-     List<Equipo> findByAsignado(Boolean asignado);
-     List<Equipo> findByRefCabina(Boolean asignado);
-     List<Equipo> findByCondicionUsado(Boolean asignado);
-     List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad);
+    public List<Equipo> findByAsignado(Boolean asignado);
+    public List<Equipo> findByRefCabina(Boolean asignado);
+    public List<Equipo> findByCondicionUsado(Boolean asignado);
+    public List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad);
      //List<Equipo> findByFechaCaducidad(LocalDate localDate);
 
 
