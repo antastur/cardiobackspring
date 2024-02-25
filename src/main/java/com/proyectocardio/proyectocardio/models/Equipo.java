@@ -41,12 +41,11 @@ public class Equipo {
     private Long id;
 
     @NotNull(message="Ingresa número de serie")
-    @Column(name="numSerie")
+    @Column(name="numSerie", unique=true)
     private String numSerie;
 
     @Column(name="marca")
     private String marca;
-
     @Column(name="modelo")
     private String modelo;
 

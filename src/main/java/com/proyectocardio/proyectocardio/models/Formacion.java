@@ -54,7 +54,7 @@ public class Formacion {
 
     @Temporal(TemporalType.DATE)
     //@DateTimeFormat(iso=ISO.DATE)
-    @Nonnull
+    @NotNull(message="Ingresa fecha recuerdo")
     //@Future
     @Column(name="recuerdo")
     private LocalDate recuerdo;

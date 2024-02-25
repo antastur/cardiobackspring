@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.models.Vehiculo;
-import com.proyectocardio.proyectocardio.services.ILugarService;
 import com.proyectocardio.proyectocardio.services.IVehiculoService;
+
+import jakarta.validation.Valid;
 
 //Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200")
@@ -38,14 +38,14 @@ public class VehiculoController {
 
 
      @PostMapping
-    public void createServLugar(@RequestBody Vehiculo vehiculo) {
+    public void createServVehiculo(@RequestBody @Valid Vehiculo vehiculo) {
       
         vehiculoServicio.creaVehiculo(vehiculo);  
     }
 
 
      @PutMapping("/{id}")
-     public void updateServVehiculo(@PathVariable(value="id") Long id,@RequestBody Vehiculo vehiculo){
+     public void updateServVehiculo(@PathVariable(value="id") Long id,@RequestBody @Valid Vehiculo vehiculo){
 
         vehiculoServicio.cambiarVehiculo(id, vehiculo); }
 

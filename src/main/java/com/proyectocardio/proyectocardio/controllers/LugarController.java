@@ -15,6 +15,8 @@ import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.services.IEspacioService;
 import com.proyectocardio.proyectocardio.services.ILugarService;
 
+import jakarta.validation.Valid;
+
 //Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -39,14 +41,14 @@ public class LugarController {
 
 
      @PostMapping
-    public void createServLugar(@RequestBody Lugar lugar) {
+    public void createServLugar(@RequestBody @Valid Lugar lugar) {
       
       lugarServicio.creaLugar(lugar);  
     }
 
 
      @PutMapping("/{id}")
-     public void updateServLugar(@PathVariable(value="id") Long id,@RequestBody Lugar lugar){
+     public void updateServLugar(@PathVariable(value="id") Long id,@RequestBody @Valid Lugar lugar){
 
       lugarServicio.cambiarLugar(id, lugar); }
 

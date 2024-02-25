@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 
 @Entity
@@ -34,7 +34,7 @@ public class Cliente {
     private Long id;
 
     @NotNull(message="Ingresa CIF")
-    @Column(name="cif", unique=true)
+    @Column(name="cif", unique = true)
     private String cif;
 
     @Column(name="nombEmp")

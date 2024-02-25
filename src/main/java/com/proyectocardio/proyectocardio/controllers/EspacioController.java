@@ -17,6 +17,8 @@ import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.models.Vehiculo;
 import com.proyectocardio.proyectocardio.services.IEspacioService;
 
+import jakarta.validation.Valid;
+
 //Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -63,13 +65,13 @@ public class EspacioController {
 
 
     @PostMapping
-    public void createServEspacio(@RequestBody Espacio espacio) {
+    public void createServEspacio(@RequestBody @Valid Espacio espacio) {
       
         espacioServicio.creaEspacio(espacio);  
     }
 
      @PutMapping("/edit/{id}")
-     public void updateServEspacio(@PathVariable(value="id") Long id,@RequestBody Espacio espacio){
+     public void updateServEspacio(@PathVariable(value="id") Long id,@RequestBody @Valid Espacio espacio){
 
         espacioServicio.cambiarEspacio(id, espacio); }
 

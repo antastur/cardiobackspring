@@ -3,7 +3,6 @@ package com.proyectocardio.proyectocardio.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.proyectocardio.proyectocardio.exceptiones.BadRequestException;
+import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
 import com.proyectocardio.proyectocardio.exceptiones.MensajeResponse;
 import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
 import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Curso;
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.services.IClienteService;
-
 
 import jakarta.validation.Valid;
 
@@ -49,14 +48,15 @@ public class ClienteController {
 
      //Metodo y endpoint para devolver lista con objetos cliente
     @GetMapping("/clientes")
-    public ResponseEntity<List<Cliente>> servirClientes(){
+    public List<Cliente> servirClientes(){
         List<Cliente> clientes=clienteServicio.getClientes();
         //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
         if(clientes==null){
             throw new NotFoundException("No existe lista de clientes");
            }
         //Si hay lista se manda esta al FrontEnd
-        return  ResponseEntity.ok(clientes);
+        return  clientes;
+        
         }
 
 
@@ -66,28 +66,22 @@ public class ClienteController {
      //Metodo y endpoint para devolver un cliente elegido por su id  
      @GetMapping("/clientes/{id}")
      public  ResponseEntity<Cliente>  servirCliente(@PathVariable(value = "id") Long id){
-       Cliente cliente=clienteServicio.getCliente(id);
        //Si no existe un cliente con ese id se manda mensaje a FrontEnd a través de la excepcion
-       if(cliente==null){
-        
-        throw new NotFoundException("Cliente "+ id);
-        }
+       Cliente cliente=clienteServicio.getCliente(id).orElseThrow(()-> new NotFoundException("No se encuntra cliente con esa "+id+" en BD"));
        //Si existe se manda el cliente
        return ResponseEntity.ok(cliente);
     }
     
 
 
-
-
-    
+ 
     //Metodo y endpoint para devolver los espacios de un cliente elegido por su id  
     @GetMapping("/clientes/espacios/{id}")
     public ResponseEntity<List<Espacio>> servirEspaciosUnCliente(@PathVariable(value = "id") Long id){
         List<Espacio> espacios=clienteServicio.getEspaciosdeUnCliente(id);
         //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
         if(espacios==null){
-            throw new NotFoundException("No existe lista de espacios");
+            throw new NotFoundException("No existe lista de espacios para cliente con id "+id);
         }
         return  ResponseEntity.ok(espacios);
     }
@@ -104,7 +98,7 @@ public class ClienteController {
         List<Curso> cursos=clienteServicio.getCursosdeUnCliente(id);
         //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
         if(cursos==null){
-            throw new NotFoundException("No existe lista de cursos");
+            throw new NotFoundException("No se han encontrado cursos para el cliente con id "+id);
         }
         return ResponseEntity.ok(cursos);
     }
@@ -116,22 +110,26 @@ public class ClienteController {
     //Metodo y endpoint para crear un cliente  
      @PostMapping("/clientes")
      public ResponseEntity<?> createServCliente(@RequestBody @Valid Cliente cliente) {
-       
+        
         Cliente clienteSave=null;
         try{
             //Si se logra crear un cliente se manda una información al FrontEnd a traves de un responeEntity
             clienteSave=clienteServicio.creaCliente(cliente); 
-            
             return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(clienteSave).build(), HttpStatus.CREATED);
+          
         //Si no se manda la información a traves de la excepción correspondiente
-        }catch(NotFoundException nfe){
+       }catch(NotFoundException nfe){
 
             throw  new NotFoundException("No se ha cargado ningún cliente");
+           
         }catch(BadRequestException bre){
 
             throw  new BadRequestException("Hay algún problema en la validacion de campos del cliente");
+        }catch(ConflictException bre){
+
+            throw  new ConflictException("Hay algún problema en la validacion de campos del cliente");
         }
-           
+    
     }
 
 
@@ -166,13 +164,18 @@ public class ClienteController {
     public ResponseEntity<?> deleteServCliente(@PathVariable(value="id") Long id){
         try {
             //Si se logra borrar el cliente se manda mensaje a FrontEnd a través de ResponseEntity
-            Cliente clienteDelete = clienteServicio.getCliente(id);
+            Cliente clienteDelete = clienteServicio.getCliente(id).orElseThrow(()-> new NotFoundException("No se encuentra cliente con esa "+id+" en BD"));
             clienteServicio.borrarCliente(clienteDelete);
-            return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(null).build(), HttpStatus.CREATED);
+            return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(clienteDelete).build(), HttpStatus.CREATED);
        //Si no a traves de la excepción correspondiente
-        } catch (DataAccessException exDt) {
-            throw  new BadRequestException(exDt.getMessage());
-        }
+        } catch (NotFoundException nfe) {
+
+            throw  new NotFoundException(nfe.getMessage());
+
+         }catch (ConflictException cfe) {
+
+            throw  new ConflictException(cfe.getMessage());
+         }
     
     }
 

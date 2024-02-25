@@ -34,7 +34,7 @@ public class Curso {
     private Long id;
 
     @NotNull(message="Ingresa Nombre del curso")
-    @Column(name="nombre")
+    @Column(name="nombre", unique=true)
     private String nombre;
     
     @OneToMany(mappedBy = "curso")

@@ -20,6 +20,8 @@ import com.proyectocardio.proyectocardio.services.IClienteService;
 import com.proyectocardio.proyectocardio.services.ICursoService;
 import com.proyectocardio.proyectocardio.services.IformacionService;
 
+import jakarta.validation.Valid;
+
 
 //Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200,http://localhost:8080")
@@ -48,13 +50,13 @@ public class CursoController  {
 
 
     @PostMapping
-    public void creaCurso(@RequestBody Curso curso ) {
+    public void creaCurso(@RequestBody @Valid Curso curso ) {
         cursoServicio.creaCurso(curso);
      
     }
 
     @PutMapping("/{id}")
-    public void cambiarCurso(@PathVariable(value="id") Long id,@RequestBody Curso curso) {
+    public void cambiarCurso(@PathVariable(value="id") Long id,@RequestBody @Valid Curso curso) {
         cursoServicio.cambiarCurso(id, curso); }
     
 

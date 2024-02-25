@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface AlumnoRepository extends  JpaRepository<Alumno,Long> {
   List<Alumno> findByFormacion(Formacion formacion);
+  
 }

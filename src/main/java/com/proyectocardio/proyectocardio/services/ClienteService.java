@@ -2,9 +2,15 @@ package com.proyectocardio.proyectocardio.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.proyectocardio.proyectocardio.exceptiones.BadRequestException;
+import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
+import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
 import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Curso;
 import com.proyectocardio.proyectocardio.models.Equipo;
@@ -12,6 +18,7 @@ import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.repositories.ClienteRepository;
 import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
+
 
 
 //Clase que implementa la interface de los servicios para las operaciones con clientes
@@ -39,15 +46,17 @@ public class ClienteService implements IClienteService{
 
     //Método que usa repositorio para guardar un cliente en BD
     @Override
-    public Cliente creaCliente(@RequestBody Cliente cliente) {
-     
-      return this.clienteRepositorio.save(cliente);
+    public Cliente creaCliente(@RequestBody Cliente cliente) throws BadRequestException,ConflictException {
+              
+        Cliente clien= this.clienteRepositorio.save(cliente);
+
+      return clien;
     }
 
 
      // Metodo para modificar un cliente en BD
     @Override
-    public Cliente cambiarCliente(Long id, Cliente cliente) {
+    public Cliente cambiarCliente(Long id, Cliente cliente)  throws ConflictException,NotFoundException,BadRequestException {
       
        //Obtiene un cliente en concreto de BD usando su id
        Cliente clien=this.clienteRepositorio.findById(id).get();
@@ -84,7 +93,7 @@ public class ClienteService implements IClienteService{
 
     // Metodo para borrar un cliente de BD
     @Override
-    public void borrarCliente(Cliente cliente) {
+    public void borrarCliente(Cliente cliente) throws ConflictException,NotFoundException{
        clienteRepositorio.delete(cliente);
        
     }
@@ -109,15 +118,15 @@ public class ClienteService implements IClienteService{
 */ 
     //Método para obtener un cliente determinado según su id
     @Override
-    public Cliente getCliente(Long id) {
+    public Optional<Cliente> getCliente(Long id) throws NotFoundException{
         
-        return clienteRepositorio.findById(id).orElse(null);
+        return clienteRepositorio.findById(id);
     }
 
    
 
      // Metodo para crear un equipo en BD
-    public Equipo creaEquipo(Equipo equipo) {
+    public Equipo creaEquipo(Equipo equipo) throws BadRequestException,ConflictException{
        
         return this.equipoRepositorio.save(equipo);
     }
@@ -125,7 +134,7 @@ public class ClienteService implements IClienteService{
 
 
     // Metodo para modificar un equipo en BD 
-    public Equipo cambiarEquipo(Long id, Equipo equipo) {
+    public Equipo cambiarEquipo(Long id, Equipo equipo)  throws ConflictException,NotFoundException,BadRequestException {
          
         //Obtiene un equipo en concreto de BD usando su id
          Equipo equip=this.equipoRepositorio.findById(id).get();
@@ -158,7 +167,7 @@ public class ClienteService implements IClienteService{
 
     //Metodo para obtener todos los espacios de un cliente determinado elegido por su id
     @Override
-    public List<Espacio> getEspaciosdeUnCliente(Long id) {
+    public List<Espacio> getEspaciosdeUnCliente(Long id) throws NotFoundException{
         //Se crea una lista de espacios
         List<Espacio> espacios = new ArrayList<Espacio>();
         //Usando el repositorio se obtiene el cliente por su id
@@ -173,7 +182,7 @@ public class ClienteService implements IClienteService{
 
     //Metodo para obtener todos los cursos de un cliente determinado elegido por su id
     @Override
-    public List<Curso> getCursosdeUnCliente(Long id) {
+    public List<Curso> getCursosdeUnCliente(Long id) throws NotFoundException{
         //Se crea una lista de cursos
         List<Curso> cursos = new ArrayList<Curso>();
         //Usando el repositorio se obtiene el cliente por su id
@@ -188,7 +197,7 @@ public class ClienteService implements IClienteService{
 
     //Método para saber si un cliente existe
     @Override
-    public boolean existsClienteById(Long id) {
+    public boolean existsClienteById(Long id) throws NotFoundException{
         return existsClienteById( id);
     }
 

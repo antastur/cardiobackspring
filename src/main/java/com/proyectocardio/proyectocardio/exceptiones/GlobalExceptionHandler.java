@@ -1,10 +1,5 @@
 package com.proyectocardio.proyectocardio.exceptiones;
 
-import java.sql.SQLData;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.coyote.BadRequestException;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.http.HttpStatus;
@@ -20,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
@@ -28,8 +24,8 @@ import jakarta.validation.ConstraintViolationException;
 
 //Anotacion que dice a la aplicacion que la clase es aplicable a todos los controladores
 //@RestControllerAdvice
-@ControllerAdvice
-public class GlobalExceptionHandler {
+@RestControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 /* 
 
        //controla los errores de los campos
@@ -111,11 +107,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             BadRequestException.class,
             org.springframework.web.bind.MissingRequestHeaderException.class,
-            org.springframework.web.bind.MissingServletRequestParameterException.class,
+            //org.springframework.web.bind.MissingServletRequestParameterException.class,
             org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class,
-            org.springframework.http.converter.HttpMessageNotReadableException.class
+           // org.springframework.http.converter.HttpMessageNotReadableException.class,
     })
-    @ResponseBody
+   @ResponseBody
     public ErrorMessage badRequest(HttpServletRequest request, Exception exception){
 
       return new ErrorMessage(exception, request.getRequestURI());
@@ -126,8 +122,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler({ConflictException.class,
       org.springframework.dao.DuplicateKeyException.class,
-      org.springframework.web.HttpRequestMethodNotSupportedException.class,
-      org.springframework.web.bind.MethodArgumentNotValidException.class
+      org.springframework.dao.DataIntegrityViolationException.class,
+      jakarta.validation.ConstraintViolationException.class,
+      jakarta.validation.ValidationException.class,
+      
+      
+      //org.springframework.web.HttpRequestMethodNotSupportedException.class,
+      //org.springframework.web.bind.MethodArgumentNotValidException.class,
      })
     @ResponseBody
     public ErrorMessage conflictRequest(HttpServletRequest request, Exception exception){

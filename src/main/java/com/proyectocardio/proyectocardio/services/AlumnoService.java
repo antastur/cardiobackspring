@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
+import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
 import com.proyectocardio.proyectocardio.models.Alumno;
+import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Formacion;
 import com.proyectocardio.proyectocardio.repositories.AlumnoRepository;
 
@@ -52,36 +55,18 @@ public class AlumnoService implements IAlumnoService{
     }
 
 
+    public void borrarAlumno(Alumno alumno) throws ConflictException,NotFoundException{
+       alumnoRepositorio.delete(alumno);
+       
+    }
+   
     @Override
-    public Boolean borrarAlumno(Long id) {
-        // Metodo para eliminar un alumno de BD
-        Alumno alumno;
-        Boolean borrado=true;
-        Optional<Alumno> oal=this.alumnoRepositorio.findById(id);
-        if(oal.isPresent())
-        try{
-            alumno=oal.get();
-            this.alumnoRepositorio.delete(alumno);
-    
-        }catch(Exception e){
-            borrado=false;
-        }
-        return borrado;
+    public Optional<Alumno> getAlumno(Long id) throws NotFoundException{
+        
+        return alumnoRepositorio.findById(id);
     }
 
-    @Override
-    public Alumno getAlumno(Long id) {
-        // Metodo para encontrar un alumno en concreto segun su id
-        Optional <Alumno> op= this.alumnoRepositorio.findById(id);
-         Alumno al=null;
-            if(op.isPresent()){
-                al=op.get();
-                return al;
-            }else{
-                return null;
-            }
-    }
-
+   
 
 
 

@@ -35,7 +35,7 @@ public class Alumno {
 
     
     @NotNull(message = "Has de ingresar DNI")
-    @Column(name="dniAlumno")
+    @Column(name="dniAlumno",unique = true)
     private String dniAlumno;
 
     @Column(name="nombre")

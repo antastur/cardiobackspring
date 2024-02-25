@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import com.proyectocardio.proyectocardio.models.Equipo;
 import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
+
 
 @Service
 public class EquipoService implements IEquipoService{
@@ -18,29 +18,35 @@ public class EquipoService implements IEquipoService{
     @Autowired
     private EquipoRepository equipoRepositorio;
 
+    //Constructor inyectando la fecha actual
     EquipoService(){
-
         this.localDate=LocalDate.now();
     }
    
+
+    // Metodo para obtener todos los equipos de BD
     @Override
     public List<Equipo> getEquipos() {
-        // Metodo para obtener todos los equipos de BD
         List<Equipo> equipos=this.equipoRepositorio.findAll();
         return equipos;
     }
 
+
+     // Metodo para crear un equipo en BD
     @Override
     public Equipo creaEquipo(Equipo equipo) {
-        // Metodo para crear un equipo en BD
-        return this.equipoRepositorio.save(equipo);
+        equipo=this.equipoRepositorio.save(equipo);
+        return equipo;
     }
 
+
+
+     // Metodo para modificar un equipo en BD
     @Override
     public Equipo cambiarEquipo(Long id, Equipo equipo) {
-         // Metodo para modificar un equipo en BD
-         Equipo equip=this.equipoRepositorio.findById(id).get();
-         equip.setNumSerie(equipo.getNumSerie());
+        
+          Equipo equip=this.equipoRepositorio.findById(id).get();
+          equip.setNumSerie(equipo.getNumSerie());
           equip.setMarca(equipo.getMarca());
           equip.setModelo(equipo.getModelo());
           equip.setFabricante(equipo.getFabricante());
@@ -63,9 +69,11 @@ public class EquipoService implements IEquipoService{
          return updatedEquipo;
     }
 
+
+    // Metodo para eliminar un equipo de BD
     @Override
     public Boolean borrarEquipo(Long id) {
-        // Metodo para eliminar un equipo de BD
+        
         Equipo equip;
         Boolean borrado=true;
         Optional<Equipo> oequip=this.equipoRepositorio.findById(id);
@@ -83,9 +91,11 @@ public class EquipoService implements IEquipoService{
     }
 
 
+
+    // Metodo para obtener un equipo determinado según su id
     @Override
     public Equipo getEquipo(Long id) {
-        // Metodo para obtener un equipo determinado según su id
+        
         Optional <Equipo> oEquip= this.equipoRepositorio.findById(id);
          Equipo equipo=null;
             if(oEquip.isPresent()){
@@ -94,42 +104,41 @@ public class EquipoService implements IEquipoService{
             }else{
                 return null;
             }
+ }
 
-    }
 
+
+    //Metodo  para obtener los equipos disponibles(no asignados)
     @Override
     public List<Equipo> getEquiposNoAsignados(Boolean asignado) {
        List<Equipo> equipos= this.equipoRepositorio.findByAsignado(false);
        return equipos;
     }
 
-    @Override
-    public List<Equipo> findByAsignado(Boolean asignado) {
-        List<Equipo> equipos=  this.equipoRepositorio.findByAsignado(true);
-        return equipos;
-    }
 
-  
-
+    //Metodo para buscar los equipos de exterior (los que contienen en su ref cabina la palabra 'exterior')
     @Override
     public List<Equipo> findByRefCabina(Boolean asignado) {
         List<Equipo> equipos=  this.equipoRepositorio.findByRefCabina("exterior");
         return equipos;
     }
 
+
+    //Metodo para buscar los equipos que esten usados (condicionUsado=true)
     @Override
     public List<Equipo> findByCondicionUsado(Boolean asignado) {
         List<Equipo> equipos=  this.equipoRepositorio.findByCondicionUsado(true);
         return equipos;
     }
 
+
+    //Metodo para buscar los equipos que caduquen antes de un año (los de fecha caducidad anterior a la fecha actual + 1 año)
     @Override
     public List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad) {
         List<Equipo> equipos= this.equipoRepositorio.findByFechaCaducidadBefore(this.localDate.plusYears(1));
         return equipos;
     }
-
-           
+     
     }
 
 

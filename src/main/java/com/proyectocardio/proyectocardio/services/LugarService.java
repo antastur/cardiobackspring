@@ -4,12 +4,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
 import com.proyectocardio.proyectocardio.repositories.LugarRepository;
 
+@Transactional
 @Service
 public class LugarService implements ILugarService{
 
@@ -37,7 +39,7 @@ public class LugarService implements ILugarService{
        
          Lugar lug=this.lugarRepositorio.findById(id).get();
        
-         lug.setUbicacion(lugar.getUbicacion());
+        // lug.setUbicacion(lugar.getUbicacion());
          lug.setTelefono(lugar.getTelefono());
          lug.setEspacio(lugar.getEspacio());
          lug.setEquipo(lugar.getEquipo());

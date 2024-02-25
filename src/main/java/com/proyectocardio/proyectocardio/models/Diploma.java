@@ -40,18 +40,21 @@ public class Diploma {
     @Column(name="dni")
     private String dni;
 
+    @NotNull(message="Ingresa nombre")
     @Column(name="nombre")
     private String nombre;
 
+    @NotNull(message="Ingresa apellidos")
     @Column(name="apellidos")
     private String apellidos;
 
+    @NotNull(message="Ingresa fecha formacion")
     @Temporal(TemporalType.DATE)
     //@DateTimeFormat(iso=ISO.DATE)
-    @Nonnull
     @Column(name="fecha")
     private LocalDate fecha;
 
+    @NotNull(message="Ingresa impartidor")
     @Column(name="impartidor")
     private String impartidor;
 

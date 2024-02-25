@@ -2,8 +2,8 @@ package com.proyectocardio.proyectocardio.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,17 +30,17 @@ public class ConsultaController {
 
     //Metodo y endpoint para devolver lista con objetos equipo con propiedad condicionUsado=true
     @GetMapping("/usados")
-    public List<Equipo> servirEquiposUsados(){
+    public ResponseEntity<List<Equipo>> servirEquiposUsados(){
      List<Equipo> equipos=this.equipoServicio.findByCondicionUsado(true);
-    return equipos;
+    return  ResponseEntity.ok(equipos);
  }
 
 
      //Metodo para devolver lista con objetos Equipo
      @GetMapping("/exterior")
-     public List<Equipo> servirEquiposExterior(){
+     public ResponseEntity<List<Equipo>> servirEquiposExterior(){
       List<Equipo> equipos=this.equipoServicio.findByCondicionUsado(true);
-     return equipos;
+     return ResponseEntity.ok(equipos);
   }
 
 
@@ -48,9 +48,9 @@ public class ConsultaController {
 
     //Metodo para devolver lista con objetos Equipo
     @GetMapping("/caducidad")
-    public List<Equipo> servirEquiposCaducos(){
+    public ResponseEntity<List<Equipo>> servirEquiposCaducos(){
      List<Equipo> equipos=this.equipoServicio.findByFechaCaducidadBefore(LocalDate.now().plusYears(1));
-    return equipos;
+    return ResponseEntity.ok(equipos);
  }
 
 
