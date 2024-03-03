@@ -49,11 +49,17 @@ public class ConsultaController {
     //Metodo para devolver lista con objetos Equipo
     @GetMapping("/caducidad")
     public ResponseEntity<List<Equipo>> servirEquiposCaducos(){
-     List<Equipo> equipos=this.equipoServicio.findByFechaCaducidadBefore(LocalDate.now().plusYears(1));
+     List<Equipo> equipos=this.equipoServicio.findByFechaCaducidad(LocalDate.now().plusYears(1));
     return ResponseEntity.ok(equipos);
  }
 
-
+    
+   //Metodo para devolver lista con objetos Equipo
+   @GetMapping("/mantenimiento")
+   public ResponseEntity<List<Equipo>> servirEquiposMant(){
+    List<Equipo> equipos=this.equipoServicio.findByFechaMantenimiento(LocalDate.now().plusMonths(2));
+   return ResponseEntity.ok(equipos);
+}
 
 
 

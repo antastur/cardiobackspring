@@ -3,6 +3,8 @@ package com.proyectocardio.proyectocardio.models;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.springframework.core.annotation.Order;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -15,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
@@ -40,7 +43,7 @@ public class Espacio  {
     private Long id;
 
     @NotNull(message="Ingresa la direccion")
-    @Column(name="direccion")
+    @Column(name="direccion", unique = true)
     private String direccion;
 
     @Column(name="horario")
@@ -54,7 +57,6 @@ public class Espacio  {
     private String email;
     
     @Temporal(TemporalType.DATE)
-    //@DateTimeFormat(iso=ISO.DATE)
     @NotNull
     @Column(name="fechRegDga")
     private LocalDate fechRegDga;

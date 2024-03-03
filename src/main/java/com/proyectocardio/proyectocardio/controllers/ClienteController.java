@@ -3,6 +3,7 @@ package com.proyectocardio.proyectocardio.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.proyectocardio.proyectocardio.exceptiones.BadRequestException;
 import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
+import com.proyectocardio.proyectocardio.exceptiones.ErrorMessage;
+import com.proyectocardio.proyectocardio.exceptiones.MensajeErrorResponse;
 import com.proyectocardio.proyectocardio.exceptiones.MensajeResponse;
 import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
 import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Curso;
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.services.IClienteService;
-
 import jakarta.validation.Valid;
 
 //Clase que define los endpoints de comunicacion con el Front
@@ -109,30 +111,22 @@ public class ClienteController {
 
     //Metodo y endpoint para crear un cliente  
      @PostMapping("/clientes")
-     public ResponseEntity<?> createServCliente(@RequestBody @Valid Cliente cliente) {
+     public ResponseEntity<Cliente>createServCliente(@RequestBody @Valid Cliente cliente) {
         
-        Cliente clienteSave=null;
+       // Cliente clienteSave=null;
         try{
             //Si se logra crear un cliente se manda una información al FrontEnd a traves de un responeEntity
-            clienteSave=clienteServicio.creaCliente(cliente); 
-            return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(clienteSave).build(), HttpStatus.CREATED);
-          
-        //Si no se manda la información a traves de la excepción correspondiente
-       }catch(NotFoundException nfe){
+           clienteServicio.creaCliente(cliente); 
+            return ResponseEntity.ok(cliente);
+            //return new ResponseEntity<Cliente>(MensajeResponse.builder().mensaje("Cliente creado")
+                   // .object(clienteSave).build(), HttpStatus.CREATED);
+         // Si no se manda la información a traves de la excepción correspondiente
+       }catch(DataIntegrityViolationException dive){
 
-            throw  new NotFoundException("No se ha cargado ningún cliente");
-           
-        }catch(BadRequestException bre){
-
-            throw  new BadRequestException("Hay algún problema en la validacion de campos del cliente");
-        }catch(ConflictException bre){
-
-            throw  new ConflictException("Hay algún problema en la validacion de campos del cliente");
-        }
-    
-    }
-
-
+            throw  new ConflictException("Error al introducir CIF o repetido o vacío");
+      }
+ 
+     }
 
 
 
@@ -148,7 +142,7 @@ public class ClienteController {
                 return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(clienteUpdate).build(), HttpStatus.CREATED);
              //Si no a traves de la excepción correspondiente
             }catch(NotFoundException nfe){
-
+                
                 throw  new NotFoundException("No se ha cargado ningún cliente id="+id);
             }catch(BadRequestException bre){
     
@@ -161,18 +155,21 @@ public class ClienteController {
 
     //Metodo y endpoint para borrar un cliente elegido por su id   
     @DeleteMapping("/clientes/{id}")
-    public ResponseEntity<?> deleteServCliente(@PathVariable(value="id") Long id){
+    public /*ResponseEntity<?>*/void deleteServCliente(@PathVariable(value="id") Long id){
         try {
             //Si se logra borrar el cliente se manda mensaje a FrontEnd a través de ResponseEntity
             Cliente clienteDelete = clienteServicio.getCliente(id).orElseThrow(()-> new NotFoundException("No se encuentra cliente con esa "+id+" en BD"));
             clienteServicio.borrarCliente(clienteDelete);
-            return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(clienteDelete).build(), HttpStatus.CREATED);
+           // return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(clienteDelete).build(), HttpStatus.CREATED);
        //Si no a traves de la excepción correspondiente
         } catch (NotFoundException nfe) {
 
             throw  new NotFoundException(nfe.getMessage());
 
          }catch (ConflictException cfe) {
+
+            throw  new ConflictException(cfe.getMessage());
+         }catch (DataIntegrityViolationException cfe) {
 
             throw  new ConflictException(cfe.getMessage());
          }

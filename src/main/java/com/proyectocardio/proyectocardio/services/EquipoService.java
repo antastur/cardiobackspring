@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
 import com.proyectocardio.proyectocardio.models.Equipo;
 import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
 
@@ -27,7 +29,7 @@ public class EquipoService implements IEquipoService{
     // Metodo para obtener todos los equipos de BD
     @Override
     public List<Equipo> getEquipos() {
-        List<Equipo> equipos=this.equipoRepositorio.findAll();
+        List<Equipo> equipos=this.equipoRepositorio.findAllByOrderByIdAsc();
         return equipos;
     }
 
@@ -35,7 +37,28 @@ public class EquipoService implements IEquipoService{
      // Metodo para crear un equipo en BD
     @Override
     public Equipo creaEquipo(Equipo equipo) {
-        equipo=this.equipoRepositorio.save(equipo);
+
+        if(!equipo.getNumtlfnoAiviago().matches("\\d{9}")){
+            throw new ConflictException("Error al introducir el teléfono");}
+            
+        //Si la fecha de entrega es anterior a fecha de fabricacion da error
+        if(equipo.getFechaEntrega().isBefore(equipo.getFechaFabricacion())){
+            throw new ConflictException("Error al introducir Fecha de entrega o fabricación");
+        }
+        //Si la fecha de caducidad es anterior a fecha de entrega da error
+        if(equipo.getFechaCaducidad().isBefore(equipo.getFechaEntrega())){
+            throw new ConflictException("Error al introducir Fecha de entrega o caducidad");
+        }
+         //Si la fecha de mantenimiento es anterior al dia actual se establece día actual como fecha mantenimiento
+         if (equipo.getFechaMantenimiento().isBefore(LocalDate.now())){
+
+            equipo.setFechaMantenimiento(LocalDate.now());
+            
+            equipo=this.equipoRepositorio.save(equipo);
+        }else{
+        //Se establece fecha mantenimiento 1 año despues de fecha de entrega
+        equipo.setFechaMantenimiento(equipo.getFechaEntrega().plusYears(1));
+        equipo=this.equipoRepositorio.save(equipo);}
         return equipo;
     }
 
@@ -44,6 +67,21 @@ public class EquipoService implements IEquipoService{
      // Metodo para modificar un equipo en BD
     @Override
     public Equipo cambiarEquipo(Long id, Equipo equipo) {
+
+        if(!equipo.getNumtlfnoAiviago().matches("\\d{9}")){
+            throw new ConflictException("Error al introducir el teléfono");}
+
+        //Si la fecha de mantenimiento introducida es anterior a la fecha fabricación
+        
+        //Si la fecha de entrega es anterior a fecha de fabricacion da error
+        if(equipo.getFechaEntrega().isBefore(equipo.getFechaFabricacion())){
+            throw new ConflictException("Error al introducir Fecha de entrega o fabricación");
+        }
+        //Si la fecha de caducidad es anterior a fecha de entrega da error
+        if(equipo.getFechaCaducidad().isBefore(equipo.getFechaEntrega())){
+            throw new ConflictException("Error al introducir Fecha de entrega o caducidad");
+        }   
+       
         
           Equipo equip=this.equipoRepositorio.findById(id).get();
           equip.setNumSerie(equipo.getNumSerie());
@@ -74,19 +112,25 @@ public class EquipoService implements IEquipoService{
     @Override
     public Boolean borrarEquipo(Long id) {
         
-        Equipo equip;
+        Equipo equip=null;
         Boolean borrado=true;
         Optional<Equipo> oequip=this.equipoRepositorio.findById(id);
     if(oequip.isPresent())
     try{
-        equip=oequip.get();
-       
-        //Se borra el objeto de BD
-       this.equipoRepositorio.delete(equip);
+        equip=oequip.get();  }catch(Exception e){
+            borrado=false;
+        }
+        if(equip.getAsignado()==true){
+            throw new ConflictException("Equipo asignado");
+            }
+           
+     //Se borra el objeto de BD
+      else{
+        this.equipoRepositorio.delete(equip);
+        
+       }
 
-    }catch(Exception e){
-        borrado=false;
-    }
+  
     return borrado;
     }
 
@@ -134,18 +178,23 @@ public class EquipoService implements IEquipoService{
 
     //Metodo para buscar los equipos que caduquen antes de un año (los de fecha caducidad anterior a la fecha actual + 1 año)
     @Override
-    public List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad) {
+    public List<Equipo> findByFechaCaducidad(LocalDate fechaCaducidad) {
         List<Equipo> equipos= this.equipoRepositorio.findByFechaCaducidadBefore(this.localDate.plusYears(1));
+        return equipos;
+    }
+
+
+    @Override
+    public List<Equipo> findByFechaMantenimiento(LocalDate fechaMantenimiento) {
+        List<Equipo> equipos= this.equipoRepositorio.findByFechaMantenimientoBefore(this.localDate.plusMonths(2));
+        
+      
+
+        
         return equipos;
     }
      
     }
-
-
-
-     
-
-
 
     
  /*   @Override

@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.proyectocardio.proyectocardio.exceptiones.BadRequestException;
 import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
 import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
@@ -91,6 +89,11 @@ public class ClienteService implements IClienteService{
        return updatedCliente;
     }
 
+
+
+
+
+    
     // Metodo para borrar un cliente de BD
     @Override
     public void borrarCliente(Cliente cliente) throws ConflictException,NotFoundException{
@@ -98,24 +101,10 @@ public class ClienteService implements IClienteService{
        
     }
    
-  /*  @Override
-    public Boolean borrarCliente(Long id) {
-       // Metodo para eliminar un cliente de BD
-        Cliente cliente;
-        Boolean borrado=true;
-        Optional<Cliente> ocl=this.clienteRepositorio.findById(id);
-        if(ocl.isPresent())
-        try{
-            cliente=ocl.get();
-            this.clienteRepositorio.delete(cliente);
-    
-        }catch(Exception e){
-            borrado=false;
-        }
-        return borrado;
-    }
 
-*/ 
+
+
+ 
     //Método para obtener un cliente determinado según su id
     @Override
     public Optional<Cliente> getCliente(Long id) throws NotFoundException{

@@ -3,6 +3,8 @@ package com.proyectocardio.proyectocardio.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.proyectocardio.proyectocardio.models.Equipo;
+import com.proyectocardio.proyectocardio.models.Lugar;
+
 import java.util.List;
 import java.time.LocalDate;
 
@@ -18,6 +20,8 @@ public interface EquipoRepository extends  JpaRepository<Equipo,Long> {
    List<Equipo> findByCondicionUsado(Boolean asignado);
    List<Equipo> findByRefCabina(String refCabina);
    List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad);
- 
-    
+   List<Equipo> findByFechaMantenimientoBefore(LocalDate fechaMantenimiento);
+   List<Equipo> findAllByOrderByIdAsc();
+   
+
 }

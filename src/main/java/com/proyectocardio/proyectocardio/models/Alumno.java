@@ -4,6 +4,7 @@ package com.proyectocardio.proyectocardio.models;
 
 import org.hibernate.validator.constraints.Length;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -20,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+//Se establece como entidad y se crean getters, setters y constructores con Lombock
 @Entity
 @Setter
 @Getter
@@ -28,6 +29,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Alumno {
     
+    //Se establece clave primaria para que se genere automaticamente
     @Id
     @Column(name="id")
     @GeneratedValue( strategy = GenerationType.IDENTITY)

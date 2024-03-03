@@ -11,12 +11,20 @@ public class ErrorMessage {
 
     private String path;
 
+    
+
+   
+
+   
+
     //Constructor
     public ErrorMessage(Exception exception,String path){
 
         this.exception=exception.getClass().getSimpleName();
         this.message=exception.getMessage();
         this.path=path;
+       
+        
     }
 
     //getters
@@ -27,6 +35,7 @@ public class ErrorMessage {
     public String getMessage() {
         return message;
     }
+
 
     public String getPath() {
         return path;

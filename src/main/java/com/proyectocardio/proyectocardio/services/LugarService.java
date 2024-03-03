@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
@@ -24,22 +25,31 @@ public class LugarService implements ILugarService{
     LugarService(){}
    
 
-
+    // Metodo para crear un lugar en BD
 
     @Override
     public Lugar creaLugar(Lugar lugar) {
-         // Metodo para crear un equipo en BD
-         return this.lugarRepositorio.save(lugar);
+         //Si el nim telefono no esta formado por 9 digitos
+         if(!lugar.getTelefono().matches("\\d{9}")){
+            throw new ConflictException("Error al introducir el teléfono");}else{
+         
+         return this.lugarRepositorio.save(lugar);}
     }
 
     @Override
     public Lugar cambiarLugar(Long id, Lugar lugar) {
-        
+          
+         //Si el nim telefono no esta formado por 9 digitos
+        if(!lugar.getTelefono().matches("\\d{9}")){
+        throw new ConflictException("Error al introducir el teléfono");
+
+         };
+
          // Metodo para modificar un cliente en BD
-       
+
          Lugar lug=this.lugarRepositorio.findById(id).get();
-       
-        // lug.setUbicacion(lugar.getUbicacion());
+        
+         lug.setUbicacion(lugar.getUbicacion());
          lug.setTelefono(lugar.getTelefono());
          lug.setEspacio(lugar.getEspacio());
          lug.setEquipo(lugar.getEquipo());

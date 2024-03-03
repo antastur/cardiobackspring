@@ -83,8 +83,6 @@ public class Formacion {
     @JsonBackReference(value="curso-formacion")
     @JoinColumn(name = "FK_CURSO", updatable = true, nullable = true)
     private Curso curso;
-
-
     
 }
 

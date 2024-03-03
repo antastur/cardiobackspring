@@ -10,7 +10,7 @@ public class BadRequestException extends RuntimeException {
    //  public BadRequestException(String mensaje) {
       //  super(mensaje);
    // }
-   private static final String DESCRIPTION= "Error en la solicitud 400";
+   private static final String DESCRIPTION= "Error en la solicitud falta campo";
 
    public BadRequestException(String detail){
        super(DESCRIPTION+". "+detail);

@@ -15,9 +15,10 @@ public interface IEquipoService {
     public Boolean borrarEquipo(Long id);
     public Equipo  getEquipo(Long id);
     public List<Equipo> getEquiposNoAsignados(Boolean asignado);
-     public List<Equipo> findByRefCabina(Boolean asignado);
+    public List<Equipo> findByRefCabina(Boolean asignado);
     public List<Equipo> findByCondicionUsado(Boolean asignado);
-    public List<Equipo> findByFechaCaducidadBefore(LocalDate fechaCaducidad);
+    public List<Equipo> findByFechaCaducidad(LocalDate fechaCaducidad);
+    public List<Equipo> findByFechaMantenimiento(LocalDate fechaMantenimiento);
     
 
 

@@ -12,5 +12,6 @@ public interface ILugarService {
     public Lugar cambiarLugar(Long id,Lugar lugar);
     public Boolean borrarLugar(Long id);
     public Lugar getLugar(Long id);
+    
 
 }
