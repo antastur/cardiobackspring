@@ -34,12 +34,15 @@ public class EquipoService implements IEquipoService{
     }
 
 
-     // Metodo para crear un equipo en BD
+     // Metodo para crear un equipo en BD.
     @Override
     public Equipo creaEquipo(Equipo equipo) {
 
+        if(equipo.getNumtlfnoAiviago()!=null){
+
         if(!equipo.getNumtlfnoAiviago().matches("\\d{9}")){
             throw new ConflictException("Error al introducir el teléfono");}
+        }
             
         //Si la fecha de entrega es anterior a fecha de fabricacion da error
         if(equipo.getFechaEntrega().isBefore(equipo.getFechaFabricacion())){
@@ -49,17 +52,31 @@ public class EquipoService implements IEquipoService{
         if(equipo.getFechaCaducidad().isBefore(equipo.getFechaEntrega())){
             throw new ConflictException("Error al introducir Fecha de entrega o caducidad");
         }
-         //Si la fecha de mantenimiento es anterior al dia actual se establece día actual como fecha mantenimiento
-         if (equipo.getFechaMantenimiento().isBefore(LocalDate.now())){
+         if(equipo.getFechaCaducidad().isBefore(equipo.getFechaEntrega()))
+         {
+            throw new ConflictException("Error al introducir Fecha de fabricación o caducidad");
+        }
+
+       
+        //Se establece fecha mantenimiento 1 año despues de fecha de entrega
+        equipo.setFechaMantenimiento(equipo.getFechaEntrega().plusYears(1)); 
+
+
+        if(equipo.getFechaCaducidad().isBefore(equipo.getFechaMantenimiento()))
+        {
+           throw new ConflictException("Error al introducir Fecha de fabricación o caducidad");
+       }
+
+        
+        if (equipo.getFechaMantenimiento().isBefore(LocalDate.now())){
 
             equipo.setFechaMantenimiento(LocalDate.now());
             
             equipo=this.equipoRepositorio.save(equipo);
+            return equipo;
         }else{
-        //Se establece fecha mantenimiento 1 año despues de fecha de entrega
-        equipo.setFechaMantenimiento(equipo.getFechaEntrega().plusYears(1));
-        equipo=this.equipoRepositorio.save(equipo);}
-        return equipo;
+        equipo=this.equipoRepositorio.save(equipo);
+        return equipo;}
     }
 
 
@@ -68,9 +85,10 @@ public class EquipoService implements IEquipoService{
     @Override
     public Equipo cambiarEquipo(Long id, Equipo equipo) {
 
+        if(equipo.getNumtlfnoAiviago()!=null){
         if(!equipo.getNumtlfnoAiviago().matches("\\d{9}")){
             throw new ConflictException("Error al introducir el teléfono");}
-
+        }
         //Si la fecha de mantenimiento introducida es anterior a la fecha fabricación
         
         //Si la fecha de entrega es anterior a fecha de fabricacion da error
@@ -80,8 +98,25 @@ public class EquipoService implements IEquipoService{
         //Si la fecha de caducidad es anterior a fecha de entrega da error
         if(equipo.getFechaCaducidad().isBefore(equipo.getFechaEntrega())){
             throw new ConflictException("Error al introducir Fecha de entrega o caducidad");
-        }   
+        }    //Si la fecha de mantenimiento es anterior al dia actual se establece día actual como fecha mantenimiento
        
+        if(equipo.getFechaCaducidad().isBefore(equipo.getFechaEntrega()))
+        {
+           throw new ConflictException("Error al introducir Fecha de fabricación o caducidad");
+       }
+       
+       if(equipo.getFechaCaducidad().isBefore(equipo.getFechaMantenimiento()))
+       {
+          throw new ConflictException("Error al introducir Fecha de fabricación o caducidad");
+      }
+
+        //Se establece fecha mantenimiento 1 año despues de fecha de entrega
+        //equipo.setFechaMantenimiento(equipo.getFechaEntrega().plusYears(1)); 
+                
+        if (equipo.getFechaMantenimiento().isBefore(LocalDate.now())){
+
+          equipo.setFechaMantenimiento(LocalDate.now());
+        }
         
           Equipo equip=this.equipoRepositorio.findById(id).get();
           equip.setNumSerie(equipo.getNumSerie());
@@ -90,7 +125,20 @@ public class EquipoService implements IEquipoService{
           equip.setFabricante(equipo.getFabricante());
           equip.setFechaFabricacion(equipo.getFechaFabricacion());
           equip.setFechaCaducidad(equipo.getFechaCaducidad());
-          equip.setFechaEntrega(equipo.getFechaEntrega());
+         
+          if(equip.getFechaEntrega().equals(equipo.getFechaEntrega())){
+            
+                equip.setFechaMantenimiento(equipo.getFechaMantenimiento());
+                equip.setFechaEntrega(equipo.getFechaEntrega()); 
+            }else{
+                equip.setFechaMantenimiento(equipo.getFechaEntrega().plusYears(1));
+                equip.setFechaEntrega(equipo.getFechaEntrega()); 
+            }
+
+        if (equipo.getFechaMantenimiento().isBefore(equipo.getFechaEntrega())){
+            throw new ConflictException("Error al introducir Fecha de mantenimiento");
+        }
+          
           equip.setCodAiviago(equipo.getCodAiviago());
           equip.setPin(equipo.getPin());
           equip.setPuk(equipo.getPuk());

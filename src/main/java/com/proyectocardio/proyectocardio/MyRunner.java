@@ -270,7 +270,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo8.setNumSerieCabina("112743");
         fechFab = LocalDate.parse("14 04 2021", DateTimeFormatter.ofPattern("dd MM yyyy"));
         fechCad = LocalDate.parse("14 04 2029", DateTimeFormatter.ofPattern("dd MM yyyy"));
-        fechEnt = LocalDate.parse("18 05 2020", DateTimeFormatter.ofPattern("dd MM yyyy")); 
+        fechEnt = LocalDate.parse("18 05 2022", DateTimeFormatter.ofPattern("dd MM yyyy")); 
         equipo8.setFechaFabricacion(fechFab);
         equipo8.setFechaCaducidad(fechCad);
         equipo8.setFechaEntrega(fechEnt);
@@ -346,7 +346,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo11.setNumSerieCabina("155666");
         fechFab = LocalDate.parse("08 04 2016", DateTimeFormatter.ofPattern("dd MM yyyy"));
         fechCad = LocalDate.parse("08 04 2024", DateTimeFormatter.ofPattern("dd MM yyyy"));
-        fechEnt = LocalDate.parse("15 09 2023", DateTimeFormatter.ofPattern("dd MM yyyy")); 
+        fechEnt = LocalDate.parse("15 03 2023", DateTimeFormatter.ofPattern("dd MM yyyy")); 
         equipo11.setFechaFabricacion(fechFab);
         equipo11.setFechaCaducidad(fechCad);
         equipo11.setFechaEntrega(fechEnt);
@@ -370,7 +370,7 @@ public class MyRunner  implements CommandLineRunner{
         equipo12.setRefCabina("A29Exterior");
         equipo12.setNumSerieCabina("155453");
         fechFab = LocalDate.parse("11 05 2016", DateTimeFormatter.ofPattern("dd MM yyyy"));
-        fechCad = LocalDate.parse("11 05 2024", DateTimeFormatter.ofPattern("dd MM yyyy"));
+        fechCad = LocalDate.parse("11 05 2026", DateTimeFormatter.ofPattern("dd MM yyyy"));
         fechEnt = LocalDate.parse("15 10 2023", DateTimeFormatter.ofPattern("dd MM yyyy")); 
         equipo12.setFechaFabricacion(fechFab);
         equipo12.setFechaCaducidad(fechCad);

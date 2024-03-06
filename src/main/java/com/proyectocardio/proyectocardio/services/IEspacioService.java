@@ -13,6 +13,8 @@ import com.proyectocardio.proyectocardio.models.Vehiculo;
 @Service
 public interface IEspacioService {
 
+  
+
    // public List<Espacio> getEspacios();
     public Espacio creaEspacio(Espacio espacio);
     public Espacio cambiarEspacio(Long id,Espacio espacio);
@@ -20,4 +22,5 @@ public interface IEspacioService {
     public Optional<Espacio> getEspacio(Long id);
     public List<Lugar> getLugaresdeUnEspacio(Long id);
     public List<Vehiculo> getVehiculosdeUnEspacio(Long id);
+
 }

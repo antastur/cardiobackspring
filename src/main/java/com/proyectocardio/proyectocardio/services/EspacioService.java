@@ -99,13 +99,19 @@ public class EspacioService implements IEspacioService{
      //Metodo para obtener todos los lugares de un espacio determinado elegido por su id
     @Override 
      public List<Lugar> getLugaresdeUnEspacio(Long id) throws NotFoundException {
+        //Usando el repositorio se obtiene el espacio por su id
+        Espacio espacio=this.espacioRepositorio.findById(id).get();
+         //Se busca lista con repositorio de vehiculos
+         return this.lugarRepositorio.findByEspacioOrderById(espacio);
+
+      /* 
          //Se crea una lista de lugares
         List<Lugar> lugares = new ArrayList<Lugar>();
         //Usando el repositorio se obtiene el espacio por su id
         Espacio espacio= this.espacioRepositorio.findById(id).get();
         //Se llena la lista espacios con las de ese cliente y se devuelve
         lugares.addAll(espacio.getLugares());
-        return lugares;
+        return lugares; */
     }
 
 

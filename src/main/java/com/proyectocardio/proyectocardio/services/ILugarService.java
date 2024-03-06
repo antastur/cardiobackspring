@@ -1,5 +1,7 @@
 package com.proyectocardio.proyectocardio.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.proyectocardio.proyectocardio.models.Espacio;
@@ -13,5 +15,4 @@ public interface ILugarService {
     public Boolean borrarLugar(Long id);
     public Lugar getLugar(Long id);
     
-
-}
+    }

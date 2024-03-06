@@ -1,5 +1,7 @@
 package com.proyectocardio.proyectocardio.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
+import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
+import com.proyectocardio.proyectocardio.models.Cliente;
+import com.proyectocardio.proyectocardio.models.Equipo;
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
@@ -16,17 +21,12 @@ import com.proyectocardio.proyectocardio.repositories.LugarRepository;
 @Service
 public class LugarService implements ILugarService{
 
-
-
-    
     @Autowired
     private LugarRepository lugarRepositorio;
+    private EspacioRepository espacioRepositorio;
 
     LugarService(){}
-   
-
     // Metodo para crear un lugar en BD
-
     @Override
     public Lugar creaLugar(Lugar lugar) {
          //Si el nim telefono no esta formado por 9 digitos
@@ -36,14 +36,15 @@ public class LugarService implements ILugarService{
          return this.lugarRepositorio.save(lugar);}
     }
 
+
     @Override
     public Lugar cambiarLugar(Long id, Lugar lugar) {
-          
+        if(lugar.getTelefono()!=null){  
          //Si el nim telefono no esta formado por 9 digitos
         if(!lugar.getTelefono().matches("\\d{9}")){
         throw new ConflictException("Error al introducir el teléfono");
 
-         };
+         };}
 
          // Metodo para modificar un cliente en BD
 
@@ -87,6 +88,6 @@ public class LugarService implements ILugarService{
                 }else{
                     return null;
                 }
-    }
+     }
 
 }

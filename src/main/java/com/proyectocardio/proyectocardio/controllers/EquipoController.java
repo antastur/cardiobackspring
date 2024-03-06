@@ -61,25 +61,17 @@ public class EquipoController {
 
     //Metodo para devolver a back un equipo y que este lo persista
      @PostMapping
-     public ResponseEntity<?> createServEquipo(@RequestBody @Valid Equipo equipo) {
+     public ResponseEntity<Equipo> createServEquipo(@RequestBody @Valid Equipo equipo) {
        
-       Equipo equipoSave=null;
-        try{
-       equipoSave= equipoServicio.creaEquipo(equipo); 
-        return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado")
-                    .object(equipoSave).build(), HttpStatus.CREATED);
+     
+      try{
+        equipoServicio.creaEquipo(equipo); 
+        return  ResponseEntity.ok(equipo);
     }  //Si no se manda la información a traves de la excepción correspondiente
     catch(DataIntegrityViolationException dive){
 
             throw  new ConflictException("Error al introducir CIF o repetido o vacío");
-      } catch(BadRequest dive){
-
-        throw  new ConflictException("Error al introducir CIF o repetido o vacío");
-  } catch(ConflictException cfl){
-
-    throw  new ConflictException("Error al introducir CIF o repetido o vacío");
-}
-
+      } 
     }
     
      //Metodo para enviar a back la id del equipo a modificar y un equipo con las propiedades a persistir
