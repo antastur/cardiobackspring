@@ -4,7 +4,7 @@ package com.proyectocardio.proyectocardio.exceptiones;
 
 public class ErrorMessage {
 
-    //Declaración de propiedades del mensaje a mostrar
+    // Declaración de propiedades del mensaje a mostrar
     private String exception;
 
     private String message;
@@ -13,21 +13,16 @@ public class ErrorMessage {
 
     
 
-   
+    // Constructor
+    public ErrorMessage(Exception exception, String path) {
 
-   
+        this.exception = exception.getClass().getSimpleName();
+        this.message = exception.getMessage();
+        this.path = path;
 
-    //Constructor
-    public ErrorMessage(Exception exception,String path){
-
-        this.exception=exception.getClass().getSimpleName();
-        this.message=exception.getMessage();
-        this.path=path;
-       
-        
     }
 
-    //getters
+    // getters
     public String getException() {
         return exception;
     }
@@ -36,16 +31,27 @@ public class ErrorMessage {
         return message;
     }
 
-
     public String getPath() {
         return path;
     }
 
-    @Override
-    public String toString() {
-        return "ErrorMessage{" + "exception='" + exception + '\'' + ", message='" + message +'\''+ ", path='" + path + '\''+ '}';
+    
+    public void setException(String exception) {
+        this.exception = exception;
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-    
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    @Override
+    public String toString() {
+        return "ErrorMessage{" + "exception='" + exception + '\'' + ", message='" + message + '\'' + ", path='" + path
+                + '\'' + '}';
+    }
+
 }

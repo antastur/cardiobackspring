@@ -1016,44 +1016,7 @@ public class MyRunner  implements CommandLineRunner{
       alumnoRepositorio.save(alumno10);
       alumnoRepositorio.save(alumno11);
       alumnoRepositorio.save(alumno12);
-     
-      
-
-    /*  alumnoRepositorio.save(alumno2);
-      alumnoRepositorio.save(alumno3);
-      alumnoRepositorio.save(alumno4);
-      alumnoRepositorio.save(alumno5);
-      alumnoRepositorio.save(alumno6);
-      alumnoRepositorio.save(alumno7);
-      alumnoRepositorio.save(alumno8);
-      alumnoRepositorio.save(alumno9);
-      alumnoRepositorio.save(alumno10);
-      alumnoRepositorio.save(alumno11);
-      alumnoRepositorio.save(alumno12);
-      alumnoRepositorio.save(alumno13);
-      alumnoRepositorio.save(alumno14);
-      alumnoRepositorio.save(alumno15);
-      alumnoRepositorio.save(alumno16);
-      alumnoRepositorio.save(alumno17);
-      alumnoRepositorio.save(alumno18);
-      alumnoRepositorio.save(alumno19);
-      alumnoRepositorio.save(alumno20);
-      alumnoRepositorio.save(alumno21);
-      alumnoRepositorio.save(alumno22);
-      alumnoRepositorio.save(alumno23);
-      alumnoRepositorio.save(alumno24);
-      alumnoRepositorio.save(alumno25);
-      alumnoRepositorio.save(alumno26);
-      alumnoRepositorio.save(alumno27);
-      alumnoRepositorio.save(alumno28);
-      alumnoRepositorio.save(alumno29);
-      alumnoRepositorio.save(alumno30);
-      alumnoRepositorio.save(alumno31);
-      alumnoRepositorio.save(alumno32); */ 
-
-
-     
-      //lugarRepositorio.save(parking);
+  
      
 
 

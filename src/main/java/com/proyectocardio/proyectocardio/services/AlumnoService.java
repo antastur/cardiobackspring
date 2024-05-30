@@ -22,25 +22,29 @@ public class AlumnoService implements IAlumnoService{
 
 
 
-    
+    // Metodo para obtener todos los alumnos de BD
     @Override
     public List<Alumno> getAlumnos() {
-        // Metodo para obtener todos los alumnos de BD
+        
         List<Alumno> alumnos=this.alumnoRepositorio.findAll();
         return alumnos;
     }
 
+
+     // Metodo para crear un alumno en BD
     @Override
     public Alumno creaAlumno(@RequestBody Alumno alumno) {
-        // Metodo para crear un alumno en BD
+       
         return this.alumnoRepositorio.save(alumno);
     }
 
 
 
+
+    // Metodo para modificar un alumno en BD
     @Override
     public Alumno cambiarAlumno(Long id, Alumno alumno) {
-        // Metodo para modificar un alumno en BD
+        
         Alumno alum=this.alumnoRepositorio.findById(id).get();
         alum.setNombre(alumno.getNombre());
         alum.setApellidos(alumno.getApellidos());
@@ -52,12 +56,15 @@ public class AlumnoService implements IAlumnoService{
       
     }
 
-
+    //Metodo para borrar un alumno
+    @Override
     public void borrarAlumno(Alumno alumno) throws ConflictException,NotFoundException{
        alumnoRepositorio.delete(alumno);
        
     }
    
+
+    //Metodo para obtener un alumno por su id
     @Override
     public Optional<Alumno> getAlumno(Long id) throws NotFoundException{
         
@@ -67,7 +74,7 @@ public class AlumnoService implements IAlumnoService{
    
 
 
-
+    //Metodo para obtener los alumnos de una formación
     @Override
     public List<Alumno> findByFormacion(Formacion formacion) {
       return null;

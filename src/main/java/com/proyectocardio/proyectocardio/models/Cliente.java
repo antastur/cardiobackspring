@@ -59,12 +59,15 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference(value="cliente-espacio")
     private Set<Espacio> espacio;
+
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference(value="cliente-curso")
     private Set<Curso> curso;
 
   
-
+    @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference(value="cliente-alumno")
+    private Set<Alumno> alumno;
     
     
 }

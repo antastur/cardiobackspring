@@ -2,6 +2,8 @@ package com.proyectocardio.proyectocardio.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import com.proyectocardio.proyectocardio.models.Equipo;
 
@@ -12,8 +14,8 @@ public interface IEquipoService {
     public List<Equipo> getEquipos();
     public Equipo creaEquipo(Equipo equipo);
     public Equipo cambiarEquipo(Long id,Equipo equipo);
-    public Boolean borrarEquipo(Long id);
-    public Equipo  getEquipo(Long id);
+    public void borrarEquipo(Long id);
+    public Optional<Equipo>  getEquipo(Long id);
     public List<Equipo> getEquiposNoAsignados(Boolean asignado);
     public List<Equipo> findByRefCabina(Boolean asignado);
     public List<Equipo> findByCondicionUsado(Boolean asignado);

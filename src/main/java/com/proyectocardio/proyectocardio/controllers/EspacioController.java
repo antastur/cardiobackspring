@@ -1,7 +1,6 @@
 package com.proyectocardio.proyectocardio.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.proyectocardio.proyectocardio.exceptiones.BadRequestException;
 import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
 import com.proyectocardio.proyectocardio.exceptiones.MensajeResponse;
 import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
-import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.models.Vehiculo;
@@ -42,7 +39,7 @@ public class EspacioController {
     }
 
 
-     //Metodo y endpoint para devolver un cliente elegido por su id  
+     //Metodo y endpoint para devolver un espacio elegido por su id  
     @GetMapping("/espacios/{id}")
     public ResponseEntity<Espacio> servirEspacio(@PathVariable(value = "id") Long id){
        //Si no existe un espacio con ese id se manda mensaje a FrontEnd a través de la excepcion
@@ -62,7 +59,7 @@ public class EspacioController {
         return  ResponseEntity.ok(lugares);
     }
 
-     //Metodo y endpoint para devolver los lugares de un espacio elegido por su id      
+     //Metodo y endpoint para devolver los vehiculos de un espacio elegido por su id      
     @GetMapping("espacios/vehiculos/{id}")
     public ResponseEntity<List<Vehiculo>> servirVehiculosUnEspacio(@PathVariable(value = "id") Long id){
         List<Vehiculo> vehiculos=espacioServicio.getVehiculosdeUnEspacio(id);
@@ -80,7 +77,7 @@ public class EspacioController {
     public ResponseEntity<Espacio>  createServEspacio(@RequestBody @Valid Espacio espacio) {
     
         try{
-            //Si se logra crear un cliente se manda una información al FrontEnd a traves de un responeEntity
+            //Si se logra crear un espacio se manda una información al FrontEnd a traves de un responeEntity
         espacioServicio.creaEspacio(espacio);
         return ResponseEntity.ok(espacio);
           

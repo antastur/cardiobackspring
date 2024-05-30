@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.proyectocardio.proyectocardio.models.Curso;
-import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.repositories.CursoRepository;
-import com.proyectocardio.proyectocardio.services.IClienteService;
 import com.proyectocardio.proyectocardio.services.ICursoService;
 import com.proyectocardio.proyectocardio.services.IformacionService;
 
@@ -33,8 +30,7 @@ public class CursoController  {
     //Inyeccion de servicios
      @Autowired
      private ICursoService cursoServicio ;
-     private IformacionService formacionService ;
-     private CursoRepository alumnoRepository ;
+  
     
      //Constructor
      public CursoController() {

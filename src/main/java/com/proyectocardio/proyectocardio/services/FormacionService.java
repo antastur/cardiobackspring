@@ -2,13 +2,9 @@ package com.proyectocardio.proyectocardio.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.proyectocardio.proyectocardio.models.Equipo;
 import com.proyectocardio.proyectocardio.models.Formacion;
-import com.proyectocardio.proyectocardio.repositories.EquipoRepository;
 import com.proyectocardio.proyectocardio.repositories.FormacionRepository;
 
 @Service
@@ -34,8 +30,7 @@ public class FormacionService implements IformacionService {
 
     @Override
     public Formacion cambiarFormacion(Long id, Formacion formacion) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiarFormacion'");
+       return null;
     }
 
     @Override

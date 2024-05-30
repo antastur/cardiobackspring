@@ -42,6 +42,7 @@ public class ClienteService implements IClienteService{
     }
 
 
+
     //Método que usa repositorio para guardar un cliente en BD
     @Override
     public Cliente creaCliente(@RequestBody Cliente cliente) throws BadRequestException,ConflictException {
@@ -50,6 +51,8 @@ public class ClienteService implements IClienteService{
 
       return clien;
     }
+
+
 
 
      // Metodo para modificar un cliente en BD
@@ -104,6 +107,7 @@ public class ClienteService implements IClienteService{
 
 
 
+
  
     //Método para obtener un cliente determinado según su id
     @Override
@@ -114,11 +118,13 @@ public class ClienteService implements IClienteService{
 
    
 
+
      // Metodo para crear un equipo en BD
     public Equipo creaEquipo(Equipo equipo) throws BadRequestException,ConflictException{
        
         return this.equipoRepositorio.save(equipo);
     }
+
 
 
 
@@ -154,6 +160,7 @@ public class ClienteService implements IClienteService{
 
 
 
+
     //Metodo para obtener todos los espacios de un cliente determinado elegido por su id
     @Override
     public List<Espacio> getEspaciosdeUnCliente(Long id) throws NotFoundException{
@@ -183,6 +190,7 @@ public class ClienteService implements IClienteService{
 
 
 
+    
 
     //Método para saber si un cliente existe
     @Override

@@ -6,11 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.proyectocardio.proyectocardio.exceptiones.BadRequestException;
 import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
 import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
-import com.proyectocardio.proyectocardio.models.Cliente;
 import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
 import com.proyectocardio.proyectocardio.models.Vehiculo;
@@ -41,8 +39,10 @@ public class EspacioService implements IEspacioService{
     @Override
     public Espacio creaEspacio(@RequestBody Espacio espacio) throws BadRequestException,ConflictException{
         
+      if(espacio.getNumTelef()!=null){
         if(!espacio.getNumTelef().matches("\\d{9}")){
           throw new ConflictException("Error al introducir el teléfono");}
+        }
         Espacio espac= this.espacioRepositorio.save(espacio);
 
       return espac;
@@ -53,10 +53,11 @@ public class EspacioService implements IEspacioService{
     public Espacio cambiarEspacio(Long id, Espacio espacio) throws ConflictException,NotFoundException,BadRequestException {
        
       //Si el nim telefono no esta formado por 9 digitos
+      if(espacio.getNumTelef()!=null){
       if(!espacio.getNumTelef().matches("\\d{9}")){
         throw new ConflictException("Error al introducir el teléfono");
-
-         };
+        }
+      };
        //Obtiene un espacio en concreto de BD usando su id
          Espacio espac=this.espacioRepositorio.findById(id).get();
          //Modifica cada uno de sus atributos con los obtenidos por parametro 

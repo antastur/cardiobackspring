@@ -2,17 +2,13 @@ package com.proyectocardio.proyectocardio.services;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.proyectocardio.proyectocardio.models.FileEntity;
 import com.proyectocardio.proyectocardio.repositories.FileRepository;
 import com.proyectocardio.proyectocardio.resources.ResponseFile;
@@ -24,7 +20,7 @@ public class FileService implements IFileService {
     @Autowired
     private FileRepository fileRepository;
     
-    
+    //Metodo para subir un archivo
     @Override
     public FileEntity store(MultipartFile file) throws IOException {
 
@@ -37,6 +33,8 @@ public class FileService implements IFileService {
       return fileRepository.save(fileEntity);
     }
 
+    
+    //Metodo para bajar un archivo
     @Override
     public Optional<FileEntity> getFile(UUID id) throws FileNotFoundException {
        Optional<FileEntity> file= fileRepository.findById(id);    

@@ -43,14 +43,17 @@ public class AlumnoController {
 
     //Metodo y endpoint para devolver lista con objetos alumno
     @GetMapping("/alumnos")
-     public ResponseEntity<List<Alumno>> servirAlumnos(){
-        List<Alumno> alumnos=alumnoServicio.getAlumnos();
+     public ResponseEntity<?> servirAlumnos(){
+
+        List<Alumno> alumnos=null;
+
+        alumnos=alumnoServicio.getAlumnos();
         //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
         if(alumnos==null){
             throw new NotFoundException("No existe lista de alumnos");
            }
         //Si hay lista se manda esta al FrontEnd
-        return  ResponseEntity.ok(alumnos);
+       return new ResponseEntity<>(MensajeResponse.builder().mensaje("Alumno creado").object(alumnos).build(), HttpStatus.CREATED);
         
         }
 
@@ -58,11 +61,11 @@ public class AlumnoController {
 
     //Metodo y endpoint para devolver un alumno elegido por su id 
     @GetMapping("/alumnos/{id}")
-    public  ResponseEntity<Alumno>  servirAlumno(@PathVariable(value = "id") Long id){
+    public  ResponseEntity<?>  servirAlumno(@PathVariable(value = "id") Long id){
         //Si no existe un alumno con ese id se manda mensaje a FrontEnd a través de la excepcion
         Alumno alumno=alumnoServicio.getAlumno(id).orElseThrow(()-> new NotFoundException("No se encuntra alumno con esa "+id+" en BD"));
         //Si existe se manda el cliente
-        return ResponseEntity.ok(alumno);
+        return new ResponseEntity<>(MensajeResponse.builder().mensaje("Alumno creado").object(alumno).build(), HttpStatus.CREATED);
      }
 
 
@@ -123,7 +126,7 @@ public class AlumnoController {
             //Si se logra borrar el alumno se manda mensaje a FrontEnd a través de ResponseEntity
             Alumno alumnoDelete = alumnoServicio.getAlumno(id).orElseThrow(()-> new NotFoundException("No se encuentra alumno con esa "+id+" en BD"));
             alumnoServicio.borrarAlumno(alumnoDelete);
-            return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(alumnoDelete).build(), HttpStatus.CREATED);
+            return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(null).build(), HttpStatus.CREATED);
        //Si no a traves de la excepción correspondiente
         } catch (NotFoundException nfe) {
 

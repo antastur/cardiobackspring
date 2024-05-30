@@ -1,7 +1,7 @@
 package com.proyectocardio.proyectocardio.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.proyectocardio.proyectocardio.exceptiones.BadRequestException;
 import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
-import com.proyectocardio.proyectocardio.exceptiones.ErrorMessage;
-import com.proyectocardio.proyectocardio.exceptiones.MensajeErrorResponse;
 import com.proyectocardio.proyectocardio.exceptiones.MensajeResponse;
 import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
 import com.proyectocardio.proyectocardio.models.Cliente;
@@ -47,44 +45,47 @@ public class ClienteController {
          }
 
 
-
-     //Metodo y endpoint para devolver lista con objetos cliente
+    //Metodo y endpoint para devolver lista con objetos cliente
     @GetMapping("/clientes")
-    public List<Cliente> servirClientes(){
-        List<Cliente> clientes=clienteServicio.getClientes();
-        //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
-        if(clientes==null){
-            throw new NotFoundException("No existe lista de clientes");
-           }
-        //Si hay lista se manda esta al FrontEnd
-        return  clientes;
+    public ResponseEntity<?> servirClientes(){
         
-        }
+        List<Cliente> clientes=new ArrayList<Cliente>();
+        try{
+            clientes=clienteServicio.getClientes();
+        //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
+            }catch (NotFoundException e){
+                throw new NotFoundException("No existe lista de clientes");
+            }
 
-
+         return  ResponseEntity.ok(clientes);  
+    }    
 
 
 
      //Metodo y endpoint para devolver un cliente elegido por su id  
      @GetMapping("/clientes/{id}")
-     public  ResponseEntity<Cliente>  servirCliente(@PathVariable(value = "id") Long id){
+     public  ResponseEntity<?>  servirCliente(@PathVariable(value = "id") Long id){
        //Si no existe un cliente con ese id se manda mensaje a FrontEnd a través de la excepcion
-       Cliente cliente=clienteServicio.getCliente(id).orElseThrow(()-> new NotFoundException("No se encuntra cliente con esa "+id+" en BD"));
+       Cliente cliente=clienteServicio.getCliente(id).orElseThrow(()-> new NotFoundException("No se encuntra cliente con id "+id+" en BD"));
        //Si existe se manda el cliente
        return ResponseEntity.ok(cliente);
     }
     
-
+    
 
  
     //Metodo y endpoint para devolver los espacios de un cliente elegido por su id  
     @GetMapping("/clientes/espacios/{id}")
-    public ResponseEntity<List<Espacio>> servirEspaciosUnCliente(@PathVariable(value = "id") Long id){
-        List<Espacio> espacios=clienteServicio.getEspaciosdeUnCliente(id);
+    public ResponseEntity<?> servirEspaciosUnCliente(@PathVariable(value = "id") Long id){
+        List<Espacio> espacios=new ArrayList<Espacio>();
+        
+        try{
+            espacios= clienteServicio.getEspaciosdeUnCliente(id);
         //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
-        if(espacios==null){
-            throw new NotFoundException("No existe lista de espacios para cliente con id "+id);
-        }
+            }catch (NotFoundException e){
+                throw new NotFoundException("No existe lista de espacios");
+            }
+     
         return  ResponseEntity.ok(espacios);
     }
 
@@ -95,13 +96,17 @@ public class ClienteController {
 
     //Metodo y endpoint para devolver los cursos de un cliente elegido por su id  
     @GetMapping("/clientes/cursos/{id}")
-    public ResponseEntity<List<Curso>> servirCursosUnCliente(@PathVariable(value = "id") Long id){
+    public ResponseEntity<?> servirCursosUnCliente(@PathVariable(value = "id") Long id){
 
-        List<Curso> cursos=clienteServicio.getCursosdeUnCliente(id);
+        List<Curso> cursos=new ArrayList<Curso>();
+        
+        try{
+            cursos= clienteServicio.getCursosdeUnCliente(id);
         //Si no se obtiene la lista se manda mensaje a front a traves de la excepción
-        if(cursos==null){
-            throw new NotFoundException("No se han encontrado cursos para el cliente con id "+id);
-        }
+            }catch (NotFoundException e){
+                throw new NotFoundException("No existe lista de cursos");
+            }
+   
         return ResponseEntity.ok(cursos);
     }
 
@@ -111,15 +116,13 @@ public class ClienteController {
 
     //Metodo y endpoint para crear un cliente  
      @PostMapping("/clientes")
-     public ResponseEntity<Cliente>createServCliente(@RequestBody @Valid Cliente cliente) {
+     public ResponseEntity<?>createServCliente(@RequestBody @Valid Cliente cliente) {
         
-       // Cliente clienteSave=null;
+       
         try{
             //Si se logra crear un cliente se manda una información al FrontEnd a traves de un responeEntity
            clienteServicio.creaCliente(cliente); 
-            return ResponseEntity.ok(cliente);
-            //return new ResponseEntity<Cliente>(MensajeResponse.builder().mensaje("Cliente creado")
-                   // .object(clienteSave).build(), HttpStatus.CREATED);
+            return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(cliente).build(), HttpStatus.CREATED);
          // Si no se manda la información a traves de la excepción correspondiente
        }catch(DataIntegrityViolationException dive){
 
@@ -129,6 +132,7 @@ public class ClienteController {
      }
 
 
+     
 
     //Metodo y endpoint para modificar un cliente elegido por su id  
     @PutMapping("/clientes/{id}")
@@ -160,7 +164,7 @@ public class ClienteController {
             //Si se logra borrar el cliente se manda mensaje a FrontEnd a través de ResponseEntity
             Cliente clienteDelete = clienteServicio.getCliente(id).orElseThrow(()-> new NotFoundException("No se encuentra cliente con esa "+id+" en BD"));
             clienteServicio.borrarCliente(clienteDelete);
-           // return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(clienteDelete).build(), HttpStatus.CREATED);
+          // return new ResponseEntity<>(MensajeResponse.builder().mensaje("Cliente creado").object(null).build(), HttpStatus.CREATED);
        //Si no a traves de la excepción correspondiente
         } catch (NotFoundException nfe) {
 

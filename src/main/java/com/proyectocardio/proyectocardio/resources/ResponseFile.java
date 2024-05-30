@@ -7,7 +7,7 @@ import lombok.Data;
 
 
 
-
+//Clase para mandar y recibir archivos
 @Data
 @Builder
 public class ResponseFile {

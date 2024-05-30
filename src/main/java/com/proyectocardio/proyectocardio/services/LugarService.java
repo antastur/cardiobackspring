@@ -1,93 +1,82 @@
 package com.proyectocardio.proyectocardio.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.proyectocardio.proyectocardio.exceptiones.ConflictException;
-import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
-import com.proyectocardio.proyectocardio.models.Cliente;
-import com.proyectocardio.proyectocardio.models.Equipo;
-import com.proyectocardio.proyectocardio.models.Espacio;
 import com.proyectocardio.proyectocardio.models.Lugar;
-import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
 import com.proyectocardio.proyectocardio.repositories.LugarRepository;
 
-@Transactional
+
 @Service
 public class LugarService implements ILugarService{
 
     @Autowired
     private LugarRepository lugarRepositorio;
-    private EspacioRepository espacioRepositorio;
-
+   
+    //Constructor
     LugarService(){}
+
+
+
     // Metodo para crear un lugar en BD
     @Override
     public Lugar creaLugar(Lugar lugar) {
-         //Si el nim telefono no esta formado por 9 digitos
+         //Si el num telefono no esta formado por 9 digitos
+         if(lugar.getTelefono()!=null){  
          if(!lugar.getTelefono().matches("\\d{9}")){
-            throw new ConflictException("Error al introducir el teléfono");}else{
-         
-         return this.lugarRepositorio.save(lugar);}
-    }
+            throw new ConflictException("Error al introducir el teléfono");}}
+            
+            return this.lugarRepositorio.save(lugar);
+         }
 
 
+
+
+    // Metodo para modificar un lugar en BD
     @Override
     public Lugar cambiarLugar(Long id, Lugar lugar) {
+        //Se obliga a que si se introduce telefono sea de 9 digitos
         if(lugar.getTelefono()!=null){  
          //Si el nim telefono no esta formado por 9 digitos
         if(!lugar.getTelefono().matches("\\d{9}")){
         throw new ConflictException("Error al introducir el teléfono");
 
          };}
-
-         // Metodo para modificar un cliente en BD
-
-         Lugar lug=this.lugarRepositorio.findById(id).get();
-        
+         //Se obtiene el de esa id
+        Lugar lug=this.lugarRepositorio.findById(id).get();
+        //y se setean las propiedades introducidas por usuario
          lug.setUbicacion(lugar.getUbicacion());
          lug.setTelefono(lugar.getTelefono());
          lug.setEspacio(lugar.getEspacio());
          lug.setEquipo(lugar.getEquipo());
         
- 
+         //SE persiste
          Lugar updatedLugar=this.lugarRepositorio.save(lug);  
          return updatedLugar; 
     }
 
+
+
+
+     // Metodo para eliminar un lugar de BD
     @Override
-    public Boolean borrarLugar(Long id) {
-        // Metodo para eliminar un espacio de BD
-        Lugar lugar;
-        Boolean borrado=true;
-        Optional<Lugar> olu=this.lugarRepositorio.findById(id);
-        if(olu.isPresent())
-        try{
-            lugar=olu.get();
-            this.lugarRepositorio.delete(lugar);
-    
-        }catch(Exception e){
-            borrado=false;
-        }
-        return borrado;
+    public void borrarLugar(Lugar lugar) {
+        lugarRepositorio.delete(lugar);
+      
     }
 
+
+
+    
+    
+    // Metodo para obtener un lugar determinado según su id
     @Override
-    public Lugar getLugar(Long id) {
-        // Metodo para obtener un lugar determinado según su id
-            Optional <Lugar> oLug= this.lugarRepositorio.findById(id);
-            Lugar lugar=null;
-                if(oLug.isPresent()){
-                    lugar=oLug.get();
-                    return lugar;
-                }else{
-                    return null;
-                }
+    public Optional<Lugar> getLugar(Long id) {
+        
+          return lugarRepositorio.findById(id);
+       
      }
 
 }
