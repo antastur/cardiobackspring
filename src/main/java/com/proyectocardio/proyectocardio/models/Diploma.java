@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,17 +35,17 @@ public class Diploma {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message="Ingresa DNI de alumno")
+    /* @NotNull(message="Ingresa DNI de alumno")
     @Column(name="dni")
     private String dni;
-
+    
     @NotNull(message="Ingresa nombre")
     @Column(name="nombre")
     private String nombre;
 
     @NotNull(message="Ingresa apellidos")
     @Column(name="apellidos")
-    private String apellidos;
+    private String apellidos; */ 
 
     @NotNull(message="Ingresa fecha formacion")
     @Temporal(TemporalType.DATE)

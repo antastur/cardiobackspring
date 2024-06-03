@@ -1,71 +1,98 @@
 package com.proyectocardio.proyectocardio.services;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Optional;
-import java.util.UUID;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import com.proyectocardio.proyectocardio.models.FileEntity;
-import com.proyectocardio.proyectocardio.repositories.FileRepository;
-import com.proyectocardio.proyectocardio.resources.ResponseFile;
+//import com.proyectocardio.proyectocardio.repositories.FileRepository;
 
 @Service
 public class FileService implements IFileService {
 
+   // @Autowired
+    //private FileRepository fileRepository;
 
-    @Autowired
-    private FileRepository fileRepository;
-    
-    //Metodo para subir un archivo
+    private final Path root = Paths.get("uploads");
+
     @Override
-    public FileEntity store(MultipartFile file) throws IOException {
+    public void deleteAll() {
+        FileSystemUtils.deleteRecursively(root.toFile());
 
-      String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-      FileEntity fileEntity= FileEntity.builder()
-                .name(fileName)
-                .type(file.getContentType())
-                .data(file.getBytes())
-                .build();
-      return fileRepository.save(fileEntity);
     }
 
-    
-    //Metodo para bajar un archivo
     @Override
-    public Optional<FileEntity> getFile(UUID id) throws FileNotFoundException {
-       Optional<FileEntity> file= fileRepository.findById(id);    
-            if(file.isPresent()){
-                return file;
+    public String deleteFile(String filename) {
+
+        try {
+            Boolean delete = Files.deleteIfExists(this.root.resolve(filename));
+            return "Borrado";
+        } catch (IOException e) {
+
+            return "Error borrando";
+        }
+
+    }
+
+    @Override
+    public void init() {
+        try {
+            Files.createDirectory(root);
+        } catch (IOException e) {
+
+            throw new RuntimeException("No se puede iniciar el storage");
+        }
+
+    }
+
+    @Override
+    public Resource load(String filename) {
+        Path file;
+        Resource resource;
+        try {
+            file = root.resolve(filename);
+            resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("No existe o no se puede leer archivo");
             }
-            throw new FileNotFoundException();
+        } catch ( MalformedURLException e ) {
+            throw new RuntimeException("Error" + e.getMessage());
+        }
+
+    }
+
+    @Override
+    public Stream<Path> loadAll() {
+
+        try {
+            return Files.walk(root, 1).filter(path -> !path.equals(this.root))
+                    .map(this.root::relativize);
+        } catch ( IOException e) {
+            throw new RuntimeException("No se pueden cargar los archivos");
+        }
+    }
+
+    @Override
+    public void save(MultipartFile file) {
+
+        try {
+            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+        } catch (IOException e) {
+
+            throw new RuntimeException("No se puede copiar el archivo");
+
+        }
+    }
 
 }
-
-
-/* 
-    @Override
-    public List<ResponseFile> getAllFiles() {
-      
-        List<ResponseFile> files = fileRepository.findAll().stream().map(dbFile -> {
-            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("api/fileManager/files/")
-                    .path(dbFile.getId().toString())
-                    .toUriString();
-            return ResponseFile.builder()
-                    .name(dbFile.getName())
-                    .url(fileDownloadUri)
-                    .type(dbFile.getType())
-                    .size(dbFile.getData().length).build();
-
-        }).collect(Collectors.toList());
-        return files;
-    } */
-    }
-
-
-
-

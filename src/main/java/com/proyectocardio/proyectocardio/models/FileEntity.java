@@ -6,20 +6,31 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
 
-@Entity
-@Table(name = "files")
-@Data
+
+// @Entity
+// @Table(name = "files")
+// @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class FileEntity {
-    @Id
-    @GeneratedValue
-    private UUID id;
+    // @Id
+    // @GeneratedValue
+    // private long id;
+
     private String name;
-    private String type;
-    @Lob
-    private byte[] data;
+
+    private String url;
+
+    private String message;
+
+    public FileEntity(String message){
+        this.message= message;
+    }
+
+    public FileEntity(String name,String url){
+        this.name=name;
+        this.url=url;
+    }
 }

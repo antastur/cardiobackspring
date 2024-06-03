@@ -1,30 +1,24 @@
 package com.proyectocardio.proyectocardio.services;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.nio.file.Path;
+import java.util.stream.Stream;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.proyectocardio.proyectocardio.models.FileEntity;
-import com.proyectocardio.proyectocardio.repositories.FileRepository;
-import com.proyectocardio.proyectocardio.resources.ResponseFile;
+public interface IFileService {
 
+  // Para crear carpeta donde se guarda archivo
+  public void init();
 
-@Service
-public interface IFileService  {
+  public void save(MultipartFile file);
 
-  // Permite almacenar o cargar archivos a la base de datos
-  FileEntity store(MultipartFile file) throws IOException;
+  public Resource load(String filename);
 
-  // Permite descargar archivos de nuestra base de datos
-  Optional<FileEntity> getFile (UUID id) throws FileNotFoundException;
+  public void deleteAll();
 
-  // Permite consultar la lista de archivos cargados a nuestra base de datos
-  //List<ResponseFile> getAllFiles();
+  public Stream<Path> loadAll();
+
+  public String deleteFile(String filename);
+
 }

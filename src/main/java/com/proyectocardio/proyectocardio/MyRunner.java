@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import com.proyectocardio.proyectocardio.models.Alumno;
@@ -26,6 +27,9 @@ import com.proyectocardio.proyectocardio.repositories.EspacioRepository;
 import com.proyectocardio.proyectocardio.repositories.FormacionRepository;
 import com.proyectocardio.proyectocardio.repositories.LugarRepository;
 import com.proyectocardio.proyectocardio.repositories.VehiculoRepository;
+import com.proyectocardio.proyectocardio.services.FileService;
+
+import jakarta.annotation.Resource;
 
 
 
@@ -46,12 +50,13 @@ public class MyRunner  implements CommandLineRunner{
     private final VehiculoRepository vehiculoRepositorio;
     private final LugarRepository lugarRepositorio;
     private final EspacioRepository espacioRepositorio;
+    private final FileService fileService;
 
 
     //Inyeccion de repositorios en constructor
     public MyRunner(AlumnoRepository alumnoRepositorio,EquipoRepository equipoRepositorio,CursoRepository cursoRepositorio,ClienteRepository clienteRepositorio,
                     DiplomaRepository diplomaRepositorio,FormacionRepository formacionRepositorio,VehiculoRepository vehiculoRepositorio,
-                    LugarRepository lugarRepositorio,EspacioRepository espacioRepositorio) {
+                    LugarRepository lugarRepositorio,EspacioRepository espacioRepositorio,FileService fileService) {
         this.alumnoRepositorio=alumnoRepositorio;
         this.equipoRepositorio=equipoRepositorio;
         this.cursoRepositorio=cursoRepositorio;
@@ -61,9 +66,11 @@ public class MyRunner  implements CommandLineRunner{
         this.vehiculoRepositorio=vehiculoRepositorio;
         this.lugarRepositorio=lugarRepositorio;
         this.espacioRepositorio=espacioRepositorio;
+        this.fileService=fileService;
       }
 
     //@Transactional 
+
     @Override
     public void run(String... args) throws Exception {
        
@@ -903,9 +910,9 @@ public class MyRunner  implements CommandLineRunner{
       
       for (int x=0;x<2;x++) {
          arraydipal1[x].setAlumno(arrayalumal1[x]);
-         arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
-         arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
-         arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
+         // arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
+         // arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
+         // arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
@@ -919,9 +926,9 @@ public class MyRunner  implements CommandLineRunner{
       
       for (int x=0;x<2;x++) {
          arraydipal1[x].setAlumno(arrayalumal1[x]);
-         arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
-         arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
-         arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
+         // arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
+         // arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
+         // arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
@@ -935,9 +942,9 @@ public class MyRunner  implements CommandLineRunner{
       
       for (int x=0;x<2;x++) {
          arraydipal1[x].setAlumno(arrayalumal1[x]);
-         arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
-         arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
-         arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
+         // arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
+         // arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
+         // arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
@@ -951,9 +958,9 @@ public class MyRunner  implements CommandLineRunner{
       
       for (int x=0;x<2;x++) {
          arraydipal1[x].setAlumno(arrayalumal1[x]);
-         arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
-         arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
-         arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
+         // arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
+         // arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
+         // arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
@@ -966,9 +973,9 @@ public class MyRunner  implements CommandLineRunner{
       
       for (int x=0;x<2;x++) {
          arraydipal1[x].setAlumno(arrayalumal1[x]);
-         arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
-         arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
-         arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
+         // arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
+         // arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
+         // arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
@@ -981,9 +988,9 @@ public class MyRunner  implements CommandLineRunner{
       
       for (int x=0;x<2;x++) {
          arraydipal1[x].setAlumno(arrayalumal1[x]);
-         arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
-         arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
-         arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
+         // arraydipal1[x].setNombre(arrayalumal1[x].getNombre());
+         // arraydipal1[x].setApellidos(arrayalumal1[x].getApellidos());
+         // arraydipal1[x].setDni(arrayalumal1[x].getDniAlumno());
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
@@ -1019,6 +1026,7 @@ public class MyRunner  implements CommandLineRunner{
   
      
 
-
+       fileService.deleteAll();
+       fileService.init();
 }
 }

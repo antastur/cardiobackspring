@@ -44,7 +44,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   @ResponseStatus(HttpStatus.CONFLICT)
   @ExceptionHandler({ ConflictException.class,
     org.springframework.dao.DataIntegrityViolationException.class,
-    jakarta.validation.ConstraintViolationException.class,
+    jakarta.validation.ConstraintViolationException.class,FileUploadException.class
   })
   @ResponseBody
   public ErrorMessage conflictRequest(Exception exception, HttpServletRequest request) {
