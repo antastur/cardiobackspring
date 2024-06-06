@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import com.proyectocardio.proyectocardio.models.FileEntity;
-import com.proyectocardio.proyectocardio.services.FileService;
+import com.proyectocardio.proyectocardio.services.IFileService;
 
 //Clase que define los endpoints de comunicacion con el Front
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,7 +27,7 @@ import com.proyectocardio.proyectocardio.services.FileService;
 public class FileController {
 
     @Autowired
-    FileService fileService;
+    IFileService fileService;
 
     @PostMapping("/upload")
     public ResponseEntity<FileEntity> uploadFiles(@RequestParam("files") MultipartFile[] files) {

@@ -14,9 +14,9 @@ public interface IformacionService {
 
     //Contrato de los métodos que ha de gestionar el servicio de una formación
     public List<FormacionDto> getFormacion();
-    public Formacion creaFormacion(Formacion formacion);
-    public Formacion cambiarFormacion(Long id,Formacion formacion);
+    public FormacionDto creaFormacion(Formacion formacion);
+    public FormacionDto cambiarFormacion(Long id,Formacion formacion);
     public void borrarFormacion(Formacion formacion);
-    public Optional<Formacion>  getFormacion(Long id);
-    public List<Formacion> findByFormacion(Formacion formacion);
+    public FormacionDto getFormacion(Long id);
+    public List<FormacionDto> getFormacionesByCurso(Long id);
 }

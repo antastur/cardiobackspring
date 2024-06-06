@@ -8,4 +8,5 @@ import com.proyectocardio.proyectocardio.models.Curso;
 @Repository
 public interface CursoRepository extends  JpaRepository<Curso,Long> {
 
+   
 }

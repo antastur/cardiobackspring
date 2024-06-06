@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.proyectocardio.proyectocardio.models.Curso;
+import com.proyectocardio.proyectocardio.models.CursoDto;
 import com.proyectocardio.proyectocardio.repositories.CursoRepository;
 import com.proyectocardio.proyectocardio.services.ICursoService;
 import com.proyectocardio.proyectocardio.services.IformacionService;
@@ -39,7 +40,7 @@ public class CursoController  {
 
      //Metodo para devolver lista con objetos cliente
     @GetMapping("/cursos")
-    public List<Curso> getCursos() {
+    public List<CursoDto> getCursos() {
         return cursoServicio.getCursos();
     }
 
@@ -63,7 +64,7 @@ public class CursoController  {
     }
 
     @GetMapping("/cursos/{id}")
-    public Curso getCurso(Long id) {
+    public CursoDto getCurso(Long id) {
         return cursoServicio.getCurso(id);
     }
 
