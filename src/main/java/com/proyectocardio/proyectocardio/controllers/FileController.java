@@ -22,7 +22,7 @@ import com.proyectocardio.proyectocardio.models.FileEntity;
 import com.proyectocardio.proyectocardio.services.IFileService;
 
 //Clase que define los endpoints de comunicacion con el Front
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class FileController {
 

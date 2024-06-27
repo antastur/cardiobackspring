@@ -3,8 +3,10 @@ package com.proyectocardio.proyectocardio.models;
 
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,8 +40,8 @@ public class Curso {
     private String nombre;
     
     @OneToMany(mappedBy = "curso")
-    @JsonBackReference(value="curso-formacion")
-    private List<Formacion> formaciones;
+    @JsonManagedReference(value="curso-formacion")
+    private Set<Formacion> formaciones;
 
     @ManyToOne
     @JsonBackReference(value="cliente-curso")
@@ -47,5 +49,6 @@ public class Curso {
     private Cliente cliente;
 
     
+   
 
 }

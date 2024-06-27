@@ -2,7 +2,9 @@ package com.proyectocardio.proyectocardio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -784,6 +786,14 @@ public class MyRunner  implements CommandLineRunner{
       formacional2.setImpartidor("Jorge Novellon Grañena");
       formacional2.setAlumnos(alumnosal2);
 
+      Set<Formacion> formal1=new HashSet<Formacion>();
+      formal1.add(formacional1);
+      formal1.add(formacional2);
+      curso1.setFormaciones(formal1);
+
+      
+
+
       formacionfe.setTipo("inicial");
       formacionfe.setNumAsistentes(alumnosfe.size());
       fechFor = LocalDate.parse("08 04 2020", DateTimeFormatter.ofPattern("dd MM yyyy"));
@@ -795,6 +805,12 @@ public class MyRunner  implements CommandLineRunner{
       formacionfe.setCurso(curso2);
       formacionfe.setImpartidor("Daniel Perez Pardos");
       formacionfe.setAlumnos(alumnosfe);
+
+      Set<Formacion> formfe1=new HashSet<Formacion>();
+      formfe1.add(formacionfe);
+      curso3.setFormaciones(formfe1);
+
+
 
       formaciontr.setTipo("inicial");
       formaciontr.setNumAsistentes(alumnostr.size());
@@ -808,7 +824,11 @@ public class MyRunner  implements CommandLineRunner{
       formaciontr.setImpartidor("Daniel Perez Pardos");
       formaciontr.setAlumnos(alumnostr);
 
-      
+      Set<Formacion> formtr1=new HashSet<Formacion>();
+      formtr1.add(formaciontr);
+      curso4.setFormaciones(formtr1);
+
+
       formacionba1.setTipo("inicial");
       formacionba1.setNumAsistentes(alumnosba1.size());
       fechFor = LocalDate.parse("08 04 2020", DateTimeFormatter.ofPattern("dd MM yyyy"));
@@ -834,7 +854,10 @@ public class MyRunner  implements CommandLineRunner{
       formacionba2.setAlumnos(alumnosba2);
 
 
-
+      Set<Formacion> formba1=new HashSet<Formacion>();
+      formba1.add(formacionba1);
+      formba1.add(formacionba2);
+      curso5.setFormaciones(formba1);
 
       clienteRepositorio.save(alumasa);
       clienteRepositorio.save(ferrosa);
@@ -916,7 +939,7 @@ public class MyRunner  implements CommandLineRunner{
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
-         arrayalumal1[x].setDiploma(arraydipal1[x]);
+        //arrayalumal1[x].setDiploma(arraydipal1[x]);
       }
 
      
@@ -932,7 +955,7 @@ public class MyRunner  implements CommandLineRunner{
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
-         arrayalumal1[x].setDiploma(arraydipal1[x]);
+        // arrayalumal1[x].setDiploma(arraydipal1[x]);
       }
 
     
@@ -948,7 +971,7 @@ public class MyRunner  implements CommandLineRunner{
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
-         arrayalumal1[x].setDiploma(arraydipal1[x]);
+       //  arrayalumal1[x].setDiploma(arraydipal1[x]);
       }
       
       
@@ -964,7 +987,7 @@ public class MyRunner  implements CommandLineRunner{
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
-         arrayalumal1[x].setDiploma(arraydipal1[x]);
+      //   arrayalumal1[x].setDiploma(arraydipal1[x]);
       }
       
       alumnosba1.toArray(arrayalumal1);
@@ -979,7 +1002,7 @@ public class MyRunner  implements CommandLineRunner{
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
-         arrayalumal1[x].setDiploma(arraydipal1[x]);
+      //   arrayalumal1[x].setDiploma(arraydipal1[x]);
       }
 
       alumnosba2.toArray(arrayalumal1);
@@ -994,8 +1017,11 @@ public class MyRunner  implements CommandLineRunner{
          arraydipal1[x].setFecha(arrayalumal1[x].getFormacion().getDateFormacion());
          arraydipal1[x].setImpartidor(arrayalumal1[x].getFormacion().getImpartidor());
          arraydipal1[x].setFormacion(arrayalumal1[x].getFormacion());
-         arrayalumal1[x].setDiploma(arraydipal1[x]);
+       //  arrayalumal1[x].setDiploma(arraydipal1[x]);
       }
+      
+
+     
 
       diplomaRepositorio.save(diplomaal11);
       diplomaRepositorio.save(diplomaal12);

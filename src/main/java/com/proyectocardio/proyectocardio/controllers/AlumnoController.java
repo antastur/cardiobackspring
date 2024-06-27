@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 
 
 //Clase que define los endpoints de comunicacion con el Front
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cardio/menuPrincipal")
 public class AlumnoController {

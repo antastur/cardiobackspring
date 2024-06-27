@@ -53,11 +53,13 @@ public class Alumno {
     @JoinColumn(name = "FK_FORMACION", updatable = true, nullable = true)
     private Formacion formacion;
 
-    @ManyToOne
-    @JsonBackReference(value="cliente-alumno")
-    @JoinColumn(name = "FK_CLIENTE", updatable = true, nullable = true)
-    private Cliente cliente;
+   // @ManyToOne
+   // @JsonBackReference(value="cliente-alumno")
+    //@JoinColumn(name = "FK_CLIENTE", updatable = true, nullable = true)
+    //private Cliente cliente;
 
-    @OneToOne
-    private Diploma diploma;
+    //@OneToOne
+   //private Diploma diploma;
+
+   
 }

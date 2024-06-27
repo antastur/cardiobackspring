@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.proyectocardio.proyectocardio.dtoconverter.CursoDTOConverter;
+import com.proyectocardio.proyectocardio.exceptiones.NotFoundException;
 import com.proyectocardio.proyectocardio.models.Curso;
 import com.proyectocardio.proyectocardio.models.CursoDto;
 import com.proyectocardio.proyectocardio.repositories.CursoRepository;
@@ -17,8 +20,9 @@ public class CursoService implements ICursoService {
 
     @Autowired
     private CursoRepository cursoRepositorio;
-
-     ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    private CursoDTOConverter cursoDTOConverter; 
+     //ModelMapper modelMapper=new ModelMapper();
 
     CursoService() {
     }
@@ -28,29 +32,29 @@ public class CursoService implements ICursoService {
     public List<CursoDto> getCursos() {
 
         List<Curso> cursos = this.cursoRepositorio.findAll();
-        List<CursoDto> cursosDto=cursos.stream().map(curso-> modelMapper.map(curso, CursoDto.class)).collect(Collectors.toList());
+        List<CursoDto> cursosDto=cursos.stream().map(cursoDTOConverter::convertToDto).collect(Collectors.toList());
         return cursosDto;
     }
 
     // Metodo para crear un curso en BD
     @Override
-    public CursoDto creaCurso(@RequestBody Curso curso) {
+    public Curso creaCurso(@RequestBody Curso curso) {
         this.cursoRepositorio.save(curso);
-        CursoDto cursoDto=modelMapper.map(curso,CursoDto.class);
+       // CursoDto cursoDto=modelMapper.map(curso,CursoDto.class);
 
-        return cursoDto;
+        return curso;
     }
 
     // Metodo para modificar un curso en BD
     @Override
-    public CursoDto cambiarCurso(Long id, Curso curso) {
+    public Curso cambiarCurso(Long id, Curso curso) {
 
         Curso curs = this.cursoRepositorio.findById(id).get();
         curs.setNombre(curso.getNombre());
         curs.setFormaciones(curso.getFormaciones());
         this.cursoRepositorio.save(curs);
-        CursoDto cursoDto=modelMapper.map(curs, CursoDto.class);
-        return cursoDto;
+       // CursoDto cursoDto=modelMapper.map(curs, CursoDto.class);
+        return curso;
     }
 
     // Metodo para eliminar un curso de BD
@@ -70,19 +74,11 @@ public class CursoService implements ICursoService {
             }
         return borrado;
     }
-
+    // Metodo para encontrar un curso en concreto segun su id
     @Override
-    public CursoDto getCurso(Long id) {
-        // Metodo para encontrar un curso en concreto segun su id
-        Optional<Curso> op = this.cursoRepositorio.findById(id);
-        Curso cu = null;
-        if (op.isPresent()) {
-            cu = op.get();
-            CursoDto cursoDto=modelMapper.map(cu, CursoDto.class);
-            return cursoDto;
-        } else {
-            return null;
-        }
+    public Optional<Curso> getCurso(Long id) throws NotFoundException {
+        
+        return cursoRepositorio.findById(id);
     }
 
 }

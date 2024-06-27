@@ -26,7 +26,7 @@ import com.proyectocardio.proyectocardio.services.IClienteService;
 import jakarta.validation.Valid;
 
 //Clase que define los endpoints de comunicacion con el Front
-@CrossOrigin(origins = "http://localhost:4200,http://localhost:8080")
+//@CrossOrigin(origins = "http://localhost:4200,http://localhost:8080")
 @RestController
 @RequestMapping("/cardio/menuPrincipal")
 public class ClienteController {

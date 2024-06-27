@@ -30,8 +30,8 @@ public class FormacionService implements IformacionService {
     FormacionService(){
 
     }
-
-    @Override
+ /*
+     @Override
     public List<FormacionDto> getFormacion() {
         //Metodo para obtener todos los eformaciones de BD
         List<Formacion> formaciones=formacionRepositorio.findAll();
@@ -95,15 +95,15 @@ public class FormacionService implements IformacionService {
             throw new NotFoundException("No existe formacion con id "+id);
         }
       
-    }
+    } */
 
     @Override
-    public List<FormacionDto> getFormacionesByCurso(Long id) {
+    public List<Formacion> getFormacionesByCurso(Long id) {
         Optional<Curso> curso= cursoRepository.findById(id);
         if(curso.isPresent()){
             List<Formacion> formaciones= formacionRepositorio.findByCurso(curso.get());
-            List<FormacionDto> formacionesDto=formaciones.stream().map(formacion->modelMapper.map(formacion, FormacionDto.class)).collect(Collectors.toList());
-            return formacionesDto;
+           // List<FormacionDto> formacionesDto=formaciones.stream().map(formacion->modelMapper.map(formacion, FormacionDto.class)).collect(Collectors.toList());
+            return formaciones;
         }else{
             throw new UnsupportedOperationException("Unimplemented method 'getFormacionesByCurso'");
 
@@ -132,25 +132,27 @@ public class FormacionService implements IformacionService {
 //        return null;
 //     }
 
-//     @Override
-//     public Boolean borrarFormacion(Long id) {
-//         // Metodo para eliminar un equipo de BD
-//         Formacion formacion;
-//         Boolean borrado=true;
-//         Optional<Formacion> oform=this.formacionRepositorio.findById(id);
-//     if(oform.isPresent())
-//     try{
-//         formacion=oform.get();
+    @Override
+     public void borrarFormacion(Long id) {
+        // Metodo para eliminar un equipo de BD
+         Formacion formacion;
+         Boolean borrado=true;
+         Optional<Formacion> oform=this.formacionRepositorio.findById(id);
+     if(oform.isPresent())
+    try{
+         formacion=oform.get();
+         formacion.getAlumnos().clear();
+         formacion.getDiplomas().clear();
        
-//         //Se borra el objeto de BD
-//        this.formacionRepositorio.delete(formacion);
+         //Se borra el objeto de BD
+       this.formacionRepositorio.delete(formacion);
 
-//     }catch(Exception e){
-//         borrado=false;
-//     }
-//     return borrado;
-//     }
+    }catch(Exception e){      
+        
 
+    }
+        }
+    
 //     @Override
 //     public Formacion getFormacion(Long id) {
 //       // Metodo para obtener un equipo determinado según su id

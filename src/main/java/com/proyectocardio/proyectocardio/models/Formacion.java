@@ -84,5 +84,6 @@ public class Formacion {
     @JoinColumn(name = "FK_CURSO", updatable = true, nullable = true)
     private Curso curso;
     
+   
 }
 
